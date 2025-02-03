@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from inventory.views import home, upload_excel, inventory_management  # ✅ Import inventory_management
 
+
 urlpatterns = [
     path('', home, name='home'),  # ✅ Home route
     path('admin/', admin.site.urls),  # ✅ Django admin
