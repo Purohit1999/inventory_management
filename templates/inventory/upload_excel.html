@@ -1,0 +1,6 @@
+<h2>Upload Excel File</h2>
+<form action="{% url 'upload_excel' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="excel_file" required>
+    <button type="submit">Upload</button>
+</form>

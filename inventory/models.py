@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(blank=True)  # ✅ Allow blank descriptions
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  # ✅ Added default price
 
     def __str__(self):
         return self.name
@@ -27,7 +27,7 @@ class Order(models.Model):
         return f"{self.customer_name} - {self.total_order}"
 
 class Transaction(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, default=1)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     sold_to = models.CharField(max_length=255)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -35,6 +35,3 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"{self.sold_to} bought {self.product.name} for {self.amount}"
-from django.db import models
-
-# Create your models here.
