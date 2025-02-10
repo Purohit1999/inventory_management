@@ -1,0 +1,56 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center"><i class="fas fa-pencil-alt"></i> Edit Product</h2>
+    <div class="card shadow p-4 mt-4">
+        <form method="post" class="needs-validation">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_name" class="form-label"><b>Name:</b></label>
+                <input type="text" class="form-control" id="id_name" name="name" value="{{ form.name.value }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_description" class="form-label"><b>Description:</b></label>
+                <textarea class="form-control" id="id_description" name="description" rows="4">{{ form.description.value }}</textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_price" class="form-label"><b>Price:</b></label>
+                    <input type="number" class="form-control" id="id_price" name="price" value="{{ form.price.value }}" step="0.01" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="id_stock" class="form-label"><b>Stock:</b></label>
+                    <input type="number" class="form-control" id="id_stock" name="stock" value="{{ form.stock.value }}" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_category" class="form-label"><b>Category:</b></label>
+                <select class="form-select" id="id_category" name="category">
+                    <option value="electronics" {% if form.category.value == "electronics" %}selected{% endif %}>Electronics</option>
+                    <option value="home" {% if form.category.value == "home" %}selected{% endif %}>Home</option>
+                    <option value="books" {% if form.category.value == "books" %}selected{% endif %}>Books</option>
+                    <option value="fashion" {% if form.category.value == "fashion" %}selected{% endif %}>Fashion</option>
+                    <option value="other" {% if form.category.value == "other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+                <i class="fas fa-save"></i> Update Product
+            </button>
+        </form>
+    </div>
+
+    <!-- Back to Products Button -->
+    <div class="text-center mt-3">
+        <a href="{% url 'product_list' %}" class="btn btn-secondary">
+            ⬅ Back to Products
+        </a>
+    </div>
+</div>
+{% endblock %}

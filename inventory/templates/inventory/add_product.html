@@ -1,0 +1,69 @@
+{% extends "inventory/base.html" %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center"><i class="fas fa-box-open"></i> Add a New Product</h2>
+    <div class="card shadow p-4">
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="id_name" class="form-label">Product Name:</label>
+                <input type="text" name="name" id="id_name" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_description" class="form-label">Description:</label>
+                <textarea name="description" id="id_description" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_price" class="form-label">Price (£):</label>
+                    <input type="number" name="price" id="id_price" class="form-control" required step="0.01">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="id_stock" class="form-label">Stock:</label>
+                    <input type="number" name="stock" id="id_stock" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_category" class="form-label">Category:</label>
+                <select name="category" id="id_category" class="form-select" required>
+                    <option value="electronics">Electronics</option>
+                    <option value="home">Home</option>
+                    <option value="books">Books</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100"><i class="fas fa-check-circle"></i> Add Product</button>
+        </form>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="{% url 'home' %}" class="btn btn-secondary">⬅ Back to Home</a>
+    </div>
+</div>
+
+<!-- Bootstrap Form Validation -->
+<script>
+    (() => {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })();
+</script>
+{% endblock %}
