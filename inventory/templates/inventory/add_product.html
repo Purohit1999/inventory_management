@@ -1,0 +1,14 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Add New Product</h2>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">{{ form.as_p }}</div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>
+{% endblock %}

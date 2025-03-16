@@ -1,0 +1,10 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Download File{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>Download Inventory Data</h2>
+    <a href="{% url 'download_file' %}" class="btn btn-primary mt-3">Download CSV</a>
+</div>
+{% endblock %}

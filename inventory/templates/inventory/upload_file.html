@@ -1,0 +1,35 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Upload CSV/Excel File{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="mb-0">Upload CSV/Excel File</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="file" class="form-label fw-bold">Choose File:</label>
+                            <input type="file" id="file" name="file" class="form-control" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-lg">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'inventory:product_list' %}" class="btn btn-outline-secondary">Back to Products</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
