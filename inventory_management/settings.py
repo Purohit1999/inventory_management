@@ -15,11 +15,16 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-default-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'  # ✅ Reads from env variable
 
 # 🌐 Allowed hosts (Updated for Heroku deployment)
+HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
+
 ALLOWED_HOSTS = [
-    '127.0.0.1', 
+    '127.0.0.1',
     'localhost',
-    os.getenv('HEROKU_APP_NAME', '') + '.herokuapp.com'  # ✅ Fixed Heroku domain
 ]
+
+# ✅ Add Heroku app domain only if it's set
+if HEROKU_APP_NAME:
+    ALLOWED_HOSTS.append(f'{HEROKU_APP_NAME}.herokuapp.com')
 
 
 # ===========================
@@ -33,12 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # ✅ Third-party apps
     'rest_framework',    # Django REST Framework (for API support)
     'corsheaders',       # CORS handling for APIs
     'whitenoise.runserver_nostatic',  # ✅ Handles static files for Heroku
-    
+
     # ✅ Custom apps
     'inventory',         # Inventory management app
 ]
@@ -97,15 +102,12 @@ TEMPLATES = [
 # ✅ Database Configuration (Handles Local & Heroku DB)
 # ===========================
 
-DATABASES = {}
-
-if os.getenv('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.config(default=os.getenv('DATABASE_URL'))
-else:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # ✅ Default to SQLite for local use
+        conn_max_age=600,  # ✅ Optimize for Heroku
+    )
+}
 
 
 # ===========================
