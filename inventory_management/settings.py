@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import dj_database_url  # ✅ Required for Heroku database support
 
 # ========================
 # ✅ Base Project Settings
@@ -8,13 +9,17 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 🔒 Security key (Use an environment variable in production)
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-secret-key')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-default-secret-key')
 
 # 🔧 Debug mode (Set to False in production)
-DEBUG = True  # Change to False in production
+DEBUG = os.getenv('DEBUG', 'False') == 'True'  # ✅ Reads from env variable
 
-# 🌐 Allowed hosts (Set correctly in production)
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# 🌐 Allowed hosts (Updated for Heroku deployment)
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost',
+    os.getenv('HEROKU_APP_NAME', '') + '.herokuapp.com'  # ✅ Fixed Heroku domain
+]
 
 
 # ===========================
@@ -32,6 +37,7 @@ INSTALLED_APPS = [
     # ✅ Third-party apps
     'rest_framework',    # Django REST Framework (for API support)
     'corsheaders',       # CORS handling for APIs
+    'whitenoise.runserver_nostatic',  # ✅ Handles static files for Heroku
     
     # ✅ Custom apps
     'inventory',         # Inventory management app
@@ -44,7 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Handles static files on Heroku
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # ✅ Enable CORS
     'django.middleware.common.CommonMiddleware',
@@ -88,15 +94,18 @@ TEMPLATES = [
 
 
 # ===========================
-# ✅ Database Configuration (Default: SQLite)
+# ✅ Database Configuration (Handles Local & Heroku DB)
 # ===========================
 
-DATABASES = {
-    'default': {
+DATABASES = {}
+
+if os.getenv('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(default=os.getenv('DATABASE_URL'))
+else:
+    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
 
 
 # ===========================
@@ -121,17 +130,20 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',  # ✅ Ensures correct static files location
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # ✅ Necessary for `collectstatic`
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # ✅ Required for Heroku deployment
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'  # ✅ Ensures media uploads are stored correctly
+
+# ✅ Serve static files with WhiteNoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # ===========================
 # ✅ Security Hardening
 # ===========================
 
-SECURE_SSL_REDIRECT = not DEBUG  # Redirect HTTP to HTTPS
+SECURE_SSL_REDIRECT = not DEBUG  # Redirect HTTP to HTTPS in production
 SECURE_HSTS_SECONDS = 31536000  # 1 Year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
@@ -139,5 +151,10 @@ SECURE_HSTS_PRELOAD = True
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
+
+# ===========================
+# ✅ Default Auto Field
+# ===========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
