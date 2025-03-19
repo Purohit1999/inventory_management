@@ -102,7 +102,8 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 🚀 Introduce a reporting dashboard with insights  
 
 ---
-## 🧪 Testing
+## 🧪 Testing :
+Ensuring the **Inventory Management System** functions correctly across different environments is a key part of the development process. The following tests have been conducted to validate the system's **functionality, responsiveness, and error handling**.
 
 ### **📝 Testing Matrix**
 
@@ -134,13 +135,6 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 Here is the updated **Testing** section of your **README.md**, now including subheadings for **Testing User Stories, Manual Testing, Bugs & Error Checking, Solved Bugs, Known Bugs, and Python Validation**.
 
 ---
-
-## 🧪 Testing
-
-Ensuring the **Inventory Management System** functions correctly across different environments is a key part of the development process. The following tests have been conducted to validate the system's **functionality, responsiveness, and error handling**.
-
----
-
 ### **📌 Testing User Stories**
 Each user story has been tested to confirm the system meets its intended purpose.
 
