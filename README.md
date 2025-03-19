@@ -234,6 +234,7 @@ Testing has ensured that the **Inventory Management System** is **fully function
   - DB Browser for SQLite is used for managing and inspecting data.
   - Data is validated before insertion to prevent inconsistencies.
 
+### **Entity Relationship Diagram (ERD)**:
 
 | **Products**  | **Users**  | **Categories** | **Orders**  | **Order_Items**  |
 |--------------|------------|---------------|-------------|------------------|
