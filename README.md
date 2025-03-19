@@ -141,6 +141,27 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
   - DB Browser for SQLite is used for managing and inspecting data.
   - Data is validated before insertion to prevent inconsistencies.
 
+
+| **Products**  | **Users**  | **Categories** | **Orders**  | **Order_Items**  |
+|--------------|------------|---------------|-------------|------------------|
+| `id` (PK)   | `id` (PK)   | `id` (PK)     | `id` (PK)   | `id` (PK)        |
+| `name`      | `username`  | `name`        | `user_id` (FK) | `order_id` (FK) |
+| `description` | `email`   | `description` | `order_date` | `product_id` (FK) |
+| `price`     | `password`  |               | `total_price` | `quantity`      |
+| `stock`     |            |               | `status`     | `subtotal_price` |
+| `category_id` (FK) |    |               |             |                  |
+
+### **Relationships**:
+1. **One-to-Many:** A **Category** can have multiple **Products**, but each product belongs to only one category.
+2. **One-to-Many:** A **User** can place multiple **Orders**, but an order belongs to one user.
+3. **Many-to-Many:** **Orders** contain multiple **Products**, and a product can belong to multiple orders (handled through the **Order_Items** table).
+4. **Foreign Keys:**
+   - `category_id` in **Products** references `id` in **Categories**.
+   - `user_id` in **Orders** references `id` in **Users**.
+   - `order_id` and `product_id` in **Order_Items** reference `id` in **Orders** and **Products**, respectively.
+
+This structure provides a **normalized relational database** that ensures **data consistency** and **efficient inventory tracking**.
+
 ---
 ## 🙏 Credit & Acknowledgments
 - **Bootstrap** for UI styling.
