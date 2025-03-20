@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-default-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # 🌐 Allowed hosts (Updated for Heroku deployment)
-HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')
+HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system-8e7f20e57e43')
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
