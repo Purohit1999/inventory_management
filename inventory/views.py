@@ -7,6 +7,7 @@ from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 from django.contrib.auth.views import LogoutView
+from django.utils.decorators import method_decorator
 
 import pandas as pd
 
