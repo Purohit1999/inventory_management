@@ -12,15 +12,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-default-secret-key')
 
 # 🔧 Debug mode (Set to False in production)
-DEBUG = os.getenv('DEBUG', 'False') == 'True'  # ✅ Reads from env variable
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # 🌐 Allowed hosts (Updated for Heroku deployment)
-HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')  # ✅ Default to your app name
+HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    f'{HEROKU_APP_NAME}.herokuapp.com',  # ✅ Ensure Heroku app domain is included
+    f'{HEROKU_APP_NAME}.herokuapp.com',  # ✅ Ensures Heroku app domain is included
 ]
 
 # ===========================
@@ -36,12 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # ✅ Third-party apps
-    'rest_framework',    # Django REST Framework (for API support)
-    'corsheaders',       # CORS handling for APIs
-    'whitenoise.runserver_nostatic',  # ✅ Handles static files for Heroku
+    'rest_framework',    
+    'corsheaders',       
+    'whitenoise.runserver_nostatic',  
 
     # ✅ Custom apps
-    'inventory',         # Inventory management app
+    'inventory',         
 ]
 
 # ===========================
@@ -50,9 +50,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Handles static files on Heroku
+    'whitenoise.middleware.WhiteNoiseMiddleware',  
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # ✅ Enable CORS
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,8 +75,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "inventory/templates",  # ✅ Ensures templates are found
-            BASE_DIR / "templates",  # ✅ Global templates directory (Optional)
+            BASE_DIR / "inventory/templates",  
+            BASE_DIR / "templates",  
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -91,13 +91,13 @@ TEMPLATES = [
 ]
 
 # ===========================
-# ✅ Database Configuration (Handles Local & Heroku DB)
+# ✅ Database Configuration
 # ===========================
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # ✅ Default to SQLite for local use
-        conn_max_age=600,  # ✅ Optimize for Heroku
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  
+        conn_max_age=600,  
     )
 }
 
@@ -106,26 +106,29 @@ DATABASES = {
 # ===========================
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # ✅ Default authentication system
+    'django.contrib.auth.backends.ModelBackend',  
 ]
 
 # 🔐 Authentication Redirects
-LOGIN_URL = '/accounts/login/'  # ✅ Fixes login redirection issue
-LOGIN_REDIRECT_URL = '/'  # ✅ Redirects users after login
-LOGOUT_REDIRECT_URL = '/accounts/login/'  # ✅ Redirect after logout
+LOGIN_URL = '/accounts/login/'  
+LOGIN_REDIRECT_URL = '/'  
+LOGOUT_REDIRECT_URL = '/accounts/login/'  
 
 # ===========================
 # ✅ Static and Media Files
 # ===========================
 
 STATIC_URL = '/static/'
+
+# ✅ Ensure static files exist before deployment
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # ✅ Ensures correct static files location
-]
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # ✅ Required for Heroku deployment
+    BASE_DIR / 'static',
+] if (BASE_DIR / 'static').exists() else []
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'  
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'  # ✅ Ensures media uploads are stored correctly
+MEDIA_ROOT = BASE_DIR / 'media'  
 
 # ✅ Serve static files with WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -134,14 +137,32 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # ✅ Security Hardening
 # ===========================
 
-SECURE_SSL_REDIRECT = not DEBUG  # Redirect HTTP to HTTPS in production
-SECURE_HSTS_SECONDS = 31536000  # 1 Year
+SECURE_SSL_REDIRECT = not DEBUG  
+SECURE_HSTS_SECONDS = 31536000  
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# ===========================
+# ✅ Logging Configuration (For Heroku)
+# ===========================
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG' if DEBUG else 'INFO',
+    },
+}
 
 # ===========================
 # ✅ Default Auto Field
