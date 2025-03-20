@@ -8,24 +8,20 @@ import dj_database_url  # ✅ Required for Heroku database support
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 🔒 Security key (Use an environment variable in production)
+# 🔒 Security key (Now set via environment variable)
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-default-secret-key')
 
 # 🔧 Debug mode (Set to False in production)
 DEBUG = os.getenv('DEBUG', 'False') == 'True'  # ✅ Reads from env variable
 
 # 🌐 Allowed hosts (Updated for Heroku deployment)
-HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
+HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')  # ✅ Default to your app name
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    f'{HEROKU_APP_NAME}.herokuapp.com',  # ✅ Ensure Heroku app domain is included
 ]
-
-# ✅ Add Heroku app domain only if it's set
-if HEROKU_APP_NAME:
-    ALLOWED_HOSTS.append(f'{HEROKU_APP_NAME}.herokuapp.com')
-
 
 # ===========================
 # ✅ Installed Applications
@@ -48,7 +44,6 @@ INSTALLED_APPS = [
     'inventory',         # Inventory management app
 ]
 
-
 # ===========================
 # ✅ Middleware Configuration
 # ===========================
@@ -65,14 +60,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 # ===========================
 # ✅ URL and WSGI Configuration
 # ===========================
 
 ROOT_URLCONF = 'inventory_management.urls'
 WSGI_APPLICATION = 'inventory_management.wsgi.application'
-
 
 # ===========================
 # ✅ Templates Configuration
@@ -97,7 +90,6 @@ TEMPLATES = [
     },
 ]
 
-
 # ===========================
 # ✅ Database Configuration (Handles Local & Heroku DB)
 # ===========================
@@ -108,7 +100,6 @@ DATABASES = {
         conn_max_age=600,  # ✅ Optimize for Heroku
     )
 }
-
 
 # ===========================
 # ✅ Authentication Settings
@@ -122,7 +113,6 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_URL = '/accounts/login/'  # ✅ Fixes login redirection issue
 LOGIN_REDIRECT_URL = '/'  # ✅ Redirects users after login
 LOGOUT_REDIRECT_URL = '/accounts/login/'  # ✅ Redirect after logout
-
 
 # ===========================
 # ✅ Static and Media Files
@@ -140,7 +130,6 @@ MEDIA_ROOT = BASE_DIR / 'media'  # ✅ Ensures media uploads are stored correctl
 # ✅ Serve static files with WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 # ===========================
 # ✅ Security Hardening
 # ===========================
@@ -153,7 +142,6 @@ SECURE_HSTS_PRELOAD = True
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-
 
 # ===========================
 # ✅ Default Auto Field
