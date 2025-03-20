@@ -4,9 +4,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, Http404
+from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+from django.contrib.auth.views import LogoutView
+
+import pandas as pd
+
 from .models import Product
 from .forms import ProductForm, UploadFileForm
-import pandas as pd
+
 
 # ===========================
 # ✅ Home Page View
@@ -40,7 +46,7 @@ def add_product(request):
 def update_product(request, product_id):
     """ Update an existing product. """
     product = get_object_or_404(Product, id=product_id)
-    
+
     if request.method == "POST":
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
@@ -49,7 +55,7 @@ def update_product(request, product_id):
             return redirect('inventory:product_list')
     else:
         form = ProductForm(instance=product)
-    
+
     return render(request, 'inventory/update_product.html', {'form': form, 'product': product})
 
 
@@ -176,12 +182,12 @@ def login_view(request):
     return render(request, 'inventory/login.html', {'form': form})
 
 
-@login_required
-def logout_view(request):
-    """ Handles user logout. """
-    logout(request)
-    messages.success(request, "✅ Successfully logged out.")
-    return redirect('inventory:login')
+# ✅ Custom Logout View (Fix Logout 405 Error)
+@method_decorator(csrf_exempt, name='dispatch')
+class CustomLogoutView(LogoutView):
+    """ Allows both GET and POST requests for logout """
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 
 # ===========================
