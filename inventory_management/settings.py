@@ -68,53 +68,6 @@ ROOT_URLCONF = 'inventory_management.urls'
 WSGI_APPLICATION = 'inventory_management.wsgi.application'
 
 # ===========================
-# ✅ Templates Configuration
-# ===========================
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / "inventory/templates",  
-            BASE_DIR / "templates",  
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-# ===========================
-# ✅ Database Configuration
-# ===========================
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  
-        conn_max_age=600,  
-    )
-}
-
-# ===========================
-# ✅ Authentication Settings
-# ===========================
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  
-]
-
-# 🔐 Authentication Redirects
-LOGIN_URL = '/accounts/login/'  
-LOGIN_REDIRECT_URL = '/'  
-LOGOUT_REDIRECT_URL = '/accounts/login/'  
-
-# ===========================
 # ✅ Static and Media Files
 # ===========================
 
@@ -163,6 +116,10 @@ LOGGING = {
         'level': 'DEBUG' if DEBUG else 'INFO',
     },
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{HEROKU_APP_NAME}.herokuapp.com"
+]
 
 # ===========================
 # ✅ Default Auto Field

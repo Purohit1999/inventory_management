@@ -25,7 +25,14 @@
                     
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-light" href="{% url 'inventory:logout' %}">Logout</a>
+                            <!-- ✅ Recommended: Logout via POST (Security best practice) -->
+                            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link btn btn-outline-light">Logout</button>
+                            </form>
+                            
+                            <!-- ✅ Fallback Logout via GET (Not recommended, but available) -->
+                            <a class="nav-link btn btn-outline-light" href="{% url 'logout_get' %}">Logout (GET)</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
