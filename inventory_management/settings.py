@@ -16,7 +16,11 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # 🌐 Allowed Hosts (Heroku App Name Configuration)
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', f"{HEROKU_APP_NAME}.herokuapp.com"]
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    f"{HEROKU_APP_NAME}.herokuapp.com",
+]
 
 # ✅ CSRF Trusted Origins (Fixes CSRF Issues)
 CSRF_TRUSTED_ORIGINS = [f"https://{HEROKU_APP_NAME}.herokuapp.com"]
@@ -48,9 +52,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Serves static files efficiently
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Handles static files on Heroku
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # ✅ Handles CORS issues
+    'corsheaders.middleware.CorsMiddleware',  # ✅ Enables CORS for API requests
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -72,7 +76,10 @@ WSGI_APPLICATION = 'inventory_management.wsgi.application'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates", BASE_DIR / "inventory/templates"],
+        'DIRS': [
+            BASE_DIR / "templates",  # ✅ Global templates directory
+            BASE_DIR / "inventory/templates",  # ✅ App-level templates
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,8 +98,8 @@ TEMPLATES = [
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # ✅ Default SQLite for local use
-        conn_max_age=600,  # ✅ Optimize for Heroku
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # ✅ Default SQLite for local development
+        conn_max_age=600,  # ✅ Optimized for Heroku
     )
 }
 
