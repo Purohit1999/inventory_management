@@ -18,24 +18,22 @@ from .forms import ProductForm, UploadFileForm
 # ✅ Public Views
 # ===========================
 def contact_page(request):
-    return render(request, 'contact.html') 
+    """Renders the contact page."""
+    return render(request, "inventory/contact.html")
 
 def home(request):
     """Displays all products on the home page (PUBLIC)."""
     products = Product.objects.all()
     return render(request, "inventory/home.html", {"products": products})
 
-
 def about_page(request):
     """Displays information about the project (PUBLIC)."""
     return render(request, "inventory/about.html")
-
 
 def product_list(request):
     """Displays all products in a list view (PUBLIC)."""
     products = Product.objects.all()
     return render(request, "inventory/product_list.html", {"products": products})
-
 
 def download_file(request):
     """Exports all products to a downloadable CSV (PUBLIC)."""
@@ -43,7 +41,7 @@ def download_file(request):
 
     if not products:
         messages.warning(request, "⚠ No products available to download.")
-        return redirect("inventory:product_list")
+        return redirect("product_list")
 
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = "attachment; filename=inventory_products.csv"
@@ -71,7 +69,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"✅ Welcome {user.username}!")
-                return redirect("inventory:home")
+                return redirect("home")
             else:
                 messages.error(request, "❌ Invalid credentials.")
         else:
@@ -81,11 +79,9 @@ def login_view(request):
 
     return render(request, "inventory/login.html", {"form": form})
 
-
 @method_decorator(csrf_exempt, name="dispatch")
 class CustomLogoutView(LogoutView):
     """Custom logout that allows POST/GET (for Heroku deployments)."""
-
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
@@ -102,28 +98,24 @@ def add_product(request):
         if form.is_valid():
             form.save()
             messages.success(request, "✅ Product added successfully!")
-            return redirect("inventory:product_list")
+            return redirect("product_list")
     else:
         form = ProductForm()
     return render(request, "inventory/add_product.html", {"form": form})
-
 
 @login_required
 def update_product(request, product_id):
     """Update an existing product."""
     product = get_object_or_404(Product, id=product_id)
-
     if request.method == "POST":
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
             messages.success(request, "✅ Product updated successfully!")
-            return redirect("inventory:product_list")
+            return redirect("product_list")
     else:
         form = ProductForm(instance=product)
-
     return render(request, "inventory/update_product.html", {"form": form, "product": product})
-
 
 @login_required
 def delete_product(request, product_id):
@@ -131,21 +123,17 @@ def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     messages.success(request, "❌ Product deleted successfully!")
-    return redirect("inventory:product_list")
-
+    return redirect("product_list")
 
 @login_required
 def upload_file(request):
     """Handles Excel/CSV file upload and inserts data into DB."""
     if request.method == "POST" and request.FILES.get("file"):
         uploaded_file = request.FILES["file"]
-
-        # Validate file extension
         allowed_extensions = (".csv", ".xls", ".xlsx")
         if not uploaded_file.name.endswith(allowed_extensions):
             messages.error(request, "⚠ Invalid file format! Please upload CSV or Excel.")
-            return redirect("inventory:upload_file")
-
+            return redirect("upload_file")
         try:
             if uploaded_file.name.endswith(".csv"):
                 df = pd.read_csv(uploaded_file)
@@ -155,7 +143,7 @@ def upload_file(request):
             required_columns = {"name", "description", "price", "stock", "category"}
             if not required_columns.issubset(df.columns):
                 messages.error(request, "⚠ Missing required columns. Please check file headers.")
-                return redirect("inventory:upload_file")
+                return redirect("upload_file")
 
             for _, row in df.iterrows():
                 Product.objects.update_or_create(
@@ -167,13 +155,10 @@ def upload_file(request):
                         "category": row["category"],
                     },
                 )
-
             messages.success(request, "✅ File uploaded and processed!")
         except Exception as e:
             messages.error(request, f"❌ Upload error: {e}")
-
-        return redirect("inventory:upload_file")
-
+        return redirect("upload_file")
     return render(request, "inventory/upload_file.html")
 
 
