@@ -16,15 +16,18 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # 🌐 Allowed Hosts (Fixing Bad Request 400 Error)
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')
+
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     f'{HEROKU_APP_NAME}.herokuapp.com',
+    '.herokuapp.com',  # ✅ Allows all Heroku subdomains
 ]
 
 # ✅ CSRF Trusted Origins (Fixing CSRF Issues)
 CSRF_TRUSTED_ORIGINS = [
-    f"https://{HEROKU_APP_NAME}.herokuapp.com"
+    f"https://{HEROKU_APP_NAME}.herokuapp.com",
+    "https://*.herokuapp.com",  # ✅ Allow all Heroku subdomains
 ]
 
 # ===========================
@@ -98,6 +101,8 @@ TEMPLATES = [
 # ✅ Database Configuration
 # ===========================
 
+DATABASE_URL = os.getenv('DATABASE_URL')  # ✅ Fetch from Heroku
+
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # ✅ Default SQLite for local development
@@ -123,7 +128,13 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 # ===========================
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static'] if (BASE_DIR / 'static').exists() else []
+
+# ✅ Ensure `STATICFILES_DIRS` exists only if the directory is present
+if (BASE_DIR / 'static').exists():
+    STATICFILES_DIRS = [BASE_DIR / 'static']
+else:
+    STATICFILES_DIRS = []
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -135,7 +146,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # ✅ Security Hardening
 # ===========================
 
-SECURE_SSL_REDIRECT = not DEBUG
+# ✅ Only redirect SSL if running on Heroku
+SECURE_SSL_REDIRECT = not DEBUG and 'HEROKU' in os.environ
+
 SECURE_HSTS_SECONDS = 31536000  # 1 Year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
