@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 from django.contrib.auth.views import LogoutView
@@ -20,7 +20,7 @@ from .forms import ProductForm, UploadFileForm
 # ===========================
 
 def home(request):
-    """ Displays all products. """
+    """Displays all products on the home page."""
     products = Product.objects.all()
     return render(request, 'inventory/home.html', {'products': products})
 
@@ -31,7 +31,7 @@ def home(request):
 
 @login_required
 def add_product(request):
-    """ Add a new product manually through a form. """
+    """Add a new product manually."""
     if request.method == "POST":
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -45,7 +45,7 @@ def add_product(request):
 
 @login_required
 def update_product(request, product_id):
-    """ Update an existing product. """
+    """Update an existing product."""
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == "POST":
@@ -62,7 +62,7 @@ def update_product(request, product_id):
 
 @login_required
 def delete_product(request, product_id):
-    """ Delete a product """
+    """Delete a product."""
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     messages.success(request, "❌ Product deleted successfully!")
@@ -75,14 +75,14 @@ def delete_product(request, product_id):
 
 @login_required
 def upload_file(request):
-    """ Handles Excel/CSV file upload and adds products to the database. """
+    """Handles Excel/CSV file upload and inserts data into DB."""
     if request.method == "POST" and request.FILES.get("file"):
         uploaded_file = request.FILES["file"]
 
-        # Validate file type
+        # Validate file extension
         allowed_extensions = ('.csv', '.xls', '.xlsx')
         if not uploaded_file.name.endswith(allowed_extensions):
-            messages.error(request, "⚠ Invalid file format! Please upload a CSV or Excel file.")
+            messages.error(request, "⚠ Invalid file format! Please upload CSV or Excel.")
             return redirect("inventory:upload_file")
 
         try:
@@ -91,13 +91,11 @@ def upload_file(request):
             else:
                 df = pd.read_excel(uploaded_file)
 
-            # Validate required columns
             required_columns = {"name", "description", "price", "stock", "category"}
             if not required_columns.issubset(df.columns):
-                messages.error(request, "⚠ Invalid file structure. Please check column headers.")
+                messages.error(request, "⚠ Missing required columns. Please check file headers.")
                 return redirect("inventory:upload_file")
 
-            # Insert products into database (check for duplicates)
             for _, row in df.iterrows():
                 Product.objects.update_or_create(
                     name=row["name"],
@@ -109,9 +107,9 @@ def upload_file(request):
                     },
                 )
 
-            messages.success(request, "✅ File uploaded successfully!")
+            messages.success(request, "✅ File uploaded and processed!")
         except Exception as e:
-            messages.error(request, f"❌ Error uploading file: {e}")
+            messages.error(request, f"❌ Upload error: {e}")
 
         return redirect("inventory:upload_file")
 
@@ -120,7 +118,7 @@ def upload_file(request):
 
 @login_required
 def download_file(request):
-    """ Generates a CSV file containing all products. """
+    """Exports all products to a downloadable CSV."""
     products = Product.objects.all().values("name", "description", "price", "stock", "category")
 
     if not products:
@@ -142,17 +140,17 @@ def download_file(request):
 
 @login_required
 def product_list(request):
-    """ Displays the list of products with Edit/Delete options. """
+    """Displays all products in a list view."""
     products = Product.objects.all()
     return render(request, 'inventory/product_list.html', {'products': products})
 
 
 # ===========================
-# ✅ Additional Pages
+# ✅ About Page
 # ===========================
 
 def about_page(request):
-    """ Renders the About page. """
+    """Displays information about the project."""
     return render(request, 'inventory/about.html')
 
 
@@ -161,40 +159,41 @@ def about_page(request):
 # ===========================
 
 def login_view(request):
-    """ Handles user login. """
+    """Handles user login."""
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(
+                request,
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
             if user is not None:
                 login(request, user)
-                messages.success(request, f"✅ Welcome {username}!")
+                messages.success(request, f"✅ Welcome {user.username}!")
                 return redirect('inventory:home')
             else:
-                messages.error(request, "❌ Invalid username or password.")
+                messages.error(request, "❌ Invalid credentials.")
         else:
-            messages.error(request, "❌ Invalid form submission. Please check your input.")
-
+            messages.error(request, "❌ Please correct the errors below.")
     else:
         form = AuthenticationForm()
 
     return render(request, 'inventory/login.html', {'form': form})
 
 
-# ✅ Custom Logout View (Fix Logout 405 Error)
+# ✅ Custom Logout View (Handles POST and GET to avoid 405)
 @method_decorator(csrf_exempt, name='dispatch')
 class CustomLogoutView(LogoutView):
-    """ Allows both GET and POST requests for logout """
+    """Custom logout that allows POST/GET (for Heroku deployments)."""
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
 
 # ===========================
-# ✅ Custom Error Pages
+# ✅ Custom Error Handling
 # ===========================
 
 def custom_404_view(request, exception):
-    """ Custom 404 error page """
+    """Renders custom 404 error page."""
     return render(request, "inventory/404.html", status=404)
