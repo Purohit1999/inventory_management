@@ -14,16 +14,18 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '3fM2QpX1L0iW5m7dO9kG-JR8yF6cT4aY2pN
 # 🔧 Debug Mode (Set via Heroku)
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-# 🌐 Allowed Hosts (Heroku App Name Configuration)
+# 🌐 Allowed Hosts (Fixing Bad Request 400 Error)
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    f"{HEROKU_APP_NAME}.herokuapp.com",
+    f'{HEROKU_APP_NAME}.herokuapp.com',
 ]
 
-# ✅ CSRF Trusted Origins (Fixes CSRF Issues)
-CSRF_TRUSTED_ORIGINS = [f"https://{HEROKU_APP_NAME}.herokuapp.com"]
+# ✅ CSRF Trusted Origins (Fixing CSRF Issues)
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{HEROKU_APP_NAME}.herokuapp.com"
+]
 
 # ===========================
 # ✅ Installed Applications
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
     # ✅ Third-party apps
     'rest_framework',
     'corsheaders',
-    'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',  # ✅ WhiteNoise for static files
 
     # ✅ Custom apps
     'inventory',
@@ -52,9 +54,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Handles static files on Heroku
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Serve static files efficiently
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # ✅ Enables CORS for API requests
+    'corsheaders.middleware.CorsMiddleware',  # ✅ Enable CORS
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -78,7 +80,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / "templates",  # ✅ Global templates directory
-            BASE_DIR / "inventory/templates",  # ✅ App-level templates
+            BASE_DIR / "inventory/templates",  # ✅ App-specific templates
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -99,7 +101,7 @@ TEMPLATES = [
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # ✅ Default SQLite for local development
-        conn_max_age=600,  # ✅ Optimized for Heroku
+        conn_max_age=600,  # ✅ Optimize for Heroku
     )
 }
 
@@ -126,7 +128,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# ✅ Serve static files with WhiteNoise
+# ✅ Serve static files with WhiteNoise (Best practice for Heroku)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ===========================
