@@ -17,6 +17,8 @@ from .forms import ProductForm, UploadFileForm
 # ===========================
 # ✅ Public Views
 # ===========================
+def contact_page(request):
+    return render(request, 'contact.html') 
 
 def home(request):
     """Displays all products on the home page (PUBLIC)."""
