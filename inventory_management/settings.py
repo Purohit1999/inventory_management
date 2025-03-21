@@ -141,21 +141,6 @@ X_FRAME_OPTIONS = "DENY"
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# ===========================
-# ✅ EMAIL CONFIGURATION (For Contact Form)
-# ===========================
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")  # Use your SMTP Provider
-EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "your-email@example.com")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "your-email-password")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-# ✅ Ensure you set these as environment variables on Heroku:
-# heroku config:set EMAIL_HOST_USER="your-email@example.com"
-# heroku config:set EMAIL_HOST_PASSWORD="your-email-password"
 
 # ===========================
 # ✅ CORS CONFIGURATION (For APIs)
