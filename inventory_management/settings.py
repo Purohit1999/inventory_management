@@ -1,4 +1,4 @@
-import os
+import os 
 from pathlib import Path
 import dj_database_url
 
@@ -137,19 +137,16 @@ SECURE_SSL_REDIRECT = not DEBUG and "HEROKU" in os.environ
 SECURE_HSTS_SECONDS = 31536000  # 1 Year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-X_FRAME_OPTIONS = "DENY"
+X_FRAME_OPTIONS = "ALLOWALL"  # ✅ Allows embedding in "Am I Responsive"
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-
 # ===========================
-# ✅ CORS CONFIGURATION (For APIs)
+# ✅ CORS CONFIGURATION (For APIs & "Am I Responsive" Support)
 # ===========================
 
-CORS_ALLOWED_ORIGINS = [
-    f"https://{HEROKU_APP_NAME}.herokuapp.com",
-    "http://localhost:8000",
-]
+CORS_ALLOW_ALL_ORIGINS = True  # ✅ Allows all origins (for embedding)
+CORS_ALLOW_CREDENTIALS = True
 
 # ===========================
 # ✅ LOGGING CONFIGURATION (For Debugging & Production)
