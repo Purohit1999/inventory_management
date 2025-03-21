@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 from .views import (
     home, add_product, update_product, delete_product,
     upload_file, download_file, product_list, about_page  # ✅ Removed contact_page
@@ -19,6 +20,7 @@ urlpatterns = [
     path('download/', download_file, name='download_file'),  # ✅ Download route
     path('products/', product_list, name='product_list'),
     path('about/', about_page, name='about_page'),
+     path('contact/', views.contact_page, name='contact'),
 
     # ✅ Authentication Views
     path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
