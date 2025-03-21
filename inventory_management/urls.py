@@ -4,8 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 
-# ✅ Custom 404 view from your inventory app
-from inventory.views import custom_404_view
+# ✅ Import your views
+from inventory.views import custom_404_view, contact_page  # Added contact_page
 
 urlpatterns = [
     # ✅ Django Admin Panel
@@ -13,6 +13,9 @@ urlpatterns = [
 
     # ✅ Main App Routes (with namespace for reverse URL lookups)
     path('', include(('inventory.urls', 'inventory'), namespace='inventory')),
+
+    # ✅ Contact Page Route
+    path('contact/', contact_page, name='contact'),  # ✅ New Contact URL
 
     # ✅ Secure logout (requires POST, used in base.html)
     path('accounts/logout/', LogoutView.as_view(), name='logout'),

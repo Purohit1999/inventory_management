@@ -13,6 +13,10 @@ import pandas as pd
 
 from .models import Product
 from .forms import ProductForm, UploadFileForm
+from django.shortcuts import render
+
+def contact_page(request):
+    return render(request, 'inventory/contact.html')
 
 
 # ===========================
