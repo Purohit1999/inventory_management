@@ -2,37 +2,28 @@ import os
 from pathlib import Path
 import dj_database_url
 
-# ========================
-# ✅ Base Project Settings
-# ========================
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 🔒 Security Key (Set via Heroku Environment Variable)
+# Security Key
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '3fM2QpX1L0iW5m7dO9kG-JR8yF6cT4aY2pNbVZqHdXs=')
 
-# 🔧 Debug Mode (Set via Heroku)
+# Debug Mode
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-# 🌐 Allowed Hosts (Fixing Bad Request 400 Error)
+# Allowed Hosts
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', 'inventory-mgmt-system')
-
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     f'{HEROKU_APP_NAME}.herokuapp.com',
-    '.herokuapp.com',  # ✅ Allows all Heroku subdomains
+    '.herokuapp.com',
 ]
 
-# ✅ CSRF Trusted Origins (Fixing CSRF Issues)
+# CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
     f"https://{HEROKU_APP_NAME}.herokuapp.com",
-    "https://*.herokuapp.com",  # ✅ Allow all Heroku subdomains
+    "https://*.herokuapp.com",
 ]
-
-# ===========================
-# ✅ Installed Applications
-# ===========================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,25 +32,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # ✅ Third-party apps
     'rest_framework',
     'corsheaders',
-    'whitenoise.runserver_nostatic',  # ✅ WhiteNoise for static files
-
-    # ✅ Custom apps
+    'whitenoise.runserver_nostatic',
     'inventory',
 ]
 
-# ===========================
-# ✅ Middleware Configuration
-# ===========================
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Serve static files efficiently
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # ✅ Enable CORS
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -67,23 +50,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# ===========================
-# ✅ URL and WSGI Configuration
-# ===========================
-
 ROOT_URLCONF = 'inventory_management.urls'
 WSGI_APPLICATION = 'inventory_management.wsgi.application'
-
-# ===========================
-# ✅ Templates Configuration
-# ===========================
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "templates",  # ✅ Global templates directory
-            BASE_DIR / "inventory/templates",  # ✅ App-specific templates
+            BASE_DIR / "templates",
+            BASE_DIR / "inventory/templates",
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -97,70 +72,41 @@ TEMPLATES = [
     },
 ]
 
-# ===========================
-# ✅ Database Configuration
-# ===========================
-
-DATABASE_URL = os.getenv('DATABASE_URL')  # ✅ Fetch from Heroku
-
+DATABASE_URL = os.getenv('DATABASE_URL')
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # ✅ Default SQLite for local development
-        conn_max_age=600,  # ✅ Optimize for Heroku
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+        conn_max_age=600,
     )
 }
 
-# ===========================
-# ✅ Authentication Settings
-# ===========================
-
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # ✅ Default authentication system
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
-# 🔐 Authentication Redirects
-LOGIN_URL = '/accounts/login/'  
-LOGIN_REDIRECT_URL = '/'  
-LOGOUT_REDIRECT_URL = '/accounts/login/'  
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
-# ===========================
-# ✅ Static and Media Files
-# ===========================
-
+# Static & Media Files Configuration
 STATIC_URL = '/static/'
-
-# ✅ Ensure `STATICFILES_DIRS` exists only if the directory is present
-if (BASE_DIR / 'static').exists():
-    STATICFILES_DIRS = [BASE_DIR / 'static']
-else:
-    STATICFILES_DIRS = []
-
+STATICFILES_DIRS = [BASE_DIR / 'static'] if (BASE_DIR / 'static').exists() else []
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# ✅ Serve static files with WhiteNoise (Best practice for Heroku)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# ===========================
-# ✅ Security Hardening
-# ===========================
-
-# ✅ Only redirect SSL if running on Heroku
+# Security Settings
 SECURE_SSL_REDIRECT = not DEBUG and 'HEROKU' in os.environ
-
-SECURE_HSTS_SECONDS = 31536000  # 1 Year
+SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# ===========================
-# ✅ Logging Configuration (For Debugging on Heroku)
-# ===========================
-
+# Logging Configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -174,9 +120,5 @@ LOGGING = {
         'level': 'DEBUG' if DEBUG else 'INFO',
     },
 }
-
-# ===========================
-# ✅ Default Auto Field
-# ===========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
