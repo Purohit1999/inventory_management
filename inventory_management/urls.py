@@ -3,23 +3,25 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
-from inventory.views import custom_404_view  # ✅ Custom 404 Page
+
+# ✅ Custom 404 view from your inventory app
+from inventory.views import custom_404_view
 
 urlpatterns = [
-    # ✅ Django Admin
+    # ✅ Django Admin Panel
     path('admin/', admin.site.urls),
 
-    # ✅ Includes Inventory App URLs (Namespace added)
-    path('', include(('inventory.urls', 'inventory'), namespace="inventory")),
+    # ✅ Main App Routes (with namespace for reverse URL lookups)
+    path('', include(('inventory.urls', 'inventory'), namespace='inventory')),
 
-    # ✅ Logout using Django's built-in view (Fixes 405 Error)
+    # ✅ Secure logout (requires POST, used in base.html)
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
 ]
 
-# ✅ Serve static and media files during development
+# ✅ Serve static and media files during development only
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# ✅ Custom Error Handlers
+# ✅ Custom error handler (optional but useful for Heroku/production)
 handler404 = 'inventory.views.custom_404_view'
