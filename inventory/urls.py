@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import (
     home, add_product, update_product, delete_product,
-    upload_file, download_file, product_list, about_page
+    upload_file, download_file, product_list, about_page, contact_page  # ✅ Added contact_page
 )
 
 # ✅ Namespace for the app
@@ -19,6 +19,7 @@ urlpatterns = [
     path('download/', download_file, name='download_file'),  # ✅ Added Download route
     path('products/', product_list, name='product_list'),
     path('about/', about_page, name='about_page'),
+    path('contact/', contact_page, name='contact'),  # ✅ Added Contact Page Route
 
     # ✅ Authentication Views
     path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
