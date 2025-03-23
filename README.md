@@ -75,33 +75,33 @@ This feature allows business owners to quickly input new products and update exi
 
 By enabling bulk uploads, business owners can efficiently manage large inventories without the need for repetitive manual entry, thus saving valuable time.
 
-## 3. Download inventory data as a CSV for reporting and analysis.
+#### 3. Download inventory data as a CSV for reporting and analysis.
 
 This functionality provides business owners with the ability to export their inventory data for further analysis, reporting, or sharing with stakeholders.
 
-## 4. Quickly update product details without navigating complex menus.
+#### 4. Quickly update product details without navigating complex menus.
 
 A streamlined interface for updating product information ensures that business owners can make changes swiftly, improving operational efficiency.
 
-## 5. Ensure security with user authentication, restricting access to authorized personnel only.
+#### 5. Ensure security with user authentication, restricting access to authorized personnel only.
 
 Implementing robust user authentication safeguards sensitive inventory data, ensuring that only authorized users can access or modify information.
 
 ### 👥 As a Store Employee, I want to:
 
-## 1. View all products in an organized manner with categories and pricing.
+#### 1. View all products in an organized manner with categories and pricing.
 
 An organized display of products helps store employees quickly locate items, enhancing their ability to assist customers effectively.
 
-## 2. Search for products easily using a search or filter feature.
+#### 2. Search for products easily using a search or filter feature.
 
 A search function allows employees to find specific products quickly, improving response times and customer service.
 
-## 3. Edit product details quickly when stock levels or prices change.
+#### 3. Edit product details quickly when stock levels or prices change.
 
 Store employees should have the ability to make immediate updates to product information, ensuring that customers always receive accurate information.
 
-## 4. Prevent accidental deletions by adding confirmation steps.
+#### 4. Prevent accidental deletions by adding confirmation steps.
 
 Implementing confirmation steps before deletion actions helps protect against unintentional loss of inventory data, maintaining the integrity of the inventory system.
 This document serves as a foundational guide for developing an Inventory Management System that meets the needs of both business owners and store employees, ultimately leading to a more efficient and secure inventory management process.
