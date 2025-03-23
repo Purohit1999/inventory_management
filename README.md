@@ -2,10 +2,33 @@
 ![Homepage](images/responsive.png)
 
 Welcome to the **Inventory Management System**! This application helps businesses efficiently manage their product inventory, including adding, updating, deleting, and uploading product data via CSV/Excel files.
+This application helps businesses efficiently manage their product inventory, including adding, updating, deleting, and uploading product data via CSV/Excel files. This document outlines the features and functionalities of the system, providing a comprehensive guide for users to navigate and utilize the application effectively.
 ### 🌐 Website
 
 Visit the live project [here](https://inventory-mgmt-system-8e7f20e57e43.herokuapp.com).
 
+### 1. Product Management
+Add Products: Users can easily add new products to the inventory by filling out a simple form with necessary details such as product name, description, price, and quantity.
+Update Products: Existing products can be updated to reflect changes in pricing, stock levels, or product descriptions.
+Delete Products: Users have the option to remove products from the inventory that are no longer available or needed.
+
+### 2. Bulk Upload
+CSV/Excel Upload: The system supports bulk uploading of product data through CSV or Excel files, allowing users to quickly populate the inventory with multiple products at once. This feature is particularly useful for businesses with large inventories.
+
+### 3. Inventory Tracking
+Real-time Updates: The system provides real-time updates on inventory levels, ensuring that users are always aware of stock availability.
+Low Stock Alerts: Users can set alerts for low stock levels, helping to prevent stockouts and ensuring that products are always available for customers.
+
+### 4. User-Friendly Interface
+Intuitive Design: The application features an easy-to-navigate interface that simplifies the inventory management process for users of all experience levels.
+Search and Filter Options: Users can quickly find products using search and filter options, making it easier to manage large inventories.
+
+### 5. Reporting and Analytics
+Sales Reports: The system generates detailed sales reports, providing insights into product performance and helping businesses make informed decisions.
+Inventory Reports: Users can access inventory reports to analyze stock levels, turnover rates, and other key metrics.
+
+### Getting Started :
+To get started with the Inventory Management System, users need to create an account and log in. Once logged in, users can access the dashboard where they can manage their inventory, upload product data, and generate reports.
 ---
 ## 📖 Table of Contents
 1. [🔍 Project Overview](#-project-overview)
@@ -36,18 +59,54 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 ---
 ## 👤 User Stories
 
+User Stories for Inventory Management System
+
+
+
+This document outlines the user stories for an Inventory Management System, detailing the needs and requirements of both business owners and store employees. The goal is to create a user-friendly platform that streamlines inventory management, enhances productivity, and ensures security.
+
+#### User Stories
+
 ### 🧑‍💻 As a Business Owner, I want to:
-1. **Easily add and manage inventory** to keep track of available products.
-2. **Bulk upload inventory from CSV/Excel** to save time in data entry.
-3. **Download inventory data as a CSV** for reporting and analysis.
-4. **Quickly update product details** without navigating complex menus.
-5. **Ensure security with user authentication**, restricting access to authorized personnel only.
+
+## 1. Easily add and manage inventory to keep track of available products.
+
+This feature allows business owners to quickly input new products and update existing ones, ensuring that inventory levels are accurate and up-to-date.
+
+## 2. Bulk upload inventory from CSV/Excel to save time in data entry.
+
+By enabling bulk uploads, business owners can efficiently manage large inventories without the need for repetitive manual entry, thus saving valuable time.
+
+## 3. Download inventory data as a CSV for reporting and analysis.
+
+This functionality provides business owners with the ability to export their inventory data for further analysis, reporting, or sharing with stakeholders.
+
+## 4. Quickly update product details without navigating complex menus.
+
+A streamlined interface for updating product information ensures that business owners can make changes swiftly, improving operational efficiency.
+
+## 5. Ensure security with user authentication, restricting access to authorized personnel only.
+
+Implementing robust user authentication safeguards sensitive inventory data, ensuring that only authorized users can access or modify information.
 
 ### 👥 As a Store Employee, I want to:
-1. **View all products in an organized manner** with categories and pricing.
-2. **Search for products easily** using a search or filter feature.
-3. **Edit product details quickly** when stock levels or prices change.
-4. **Prevent accidental deletions** by adding confirmation steps.
+
+## 1. View all products in an organized manner with categories and pricing.
+
+An organized display of products helps store employees quickly locate items, enhancing their ability to assist customers effectively.
+
+## 2. Search for products easily using a search or filter feature.
+
+A search function allows employees to find specific products quickly, improving response times and customer service.
+
+## 3. Edit product details quickly when stock levels or prices change.
+
+Store employees should have the ability to make immediate updates to product information, ensuring that customers always receive accurate information.
+
+## 4. Prevent accidental deletions by adding confirmation steps.
+
+Implementing confirmation steps before deletion actions helps protect against unintentional loss of inventory data, maintaining the integrity of the inventory system.
+This document serves as a foundational guide for developing an Inventory Management System that meets the needs of both business owners and store employees, ultimately leading to a more efficient and secure inventory management process.
 
 ---
 ## 🎨 UX/UI Design
