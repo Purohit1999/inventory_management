@@ -297,7 +297,7 @@ Each user story has been tested to confirm the system meets its intended purpose
    - **Fix:** Ensured Django’s `logout()` function properly cleared sessions.
 
 3. **Delete Button Instantly Deleting Without Confirmation:**  
-![BUG](images/homepage.png)
+![BUG](images/del.png)
 
    - **Issue:** Clicking "Delete" immediately removed products without warning.  
    - **Fix:** Added a **JavaScript confirmation popup** before deletion.
