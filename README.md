@@ -320,21 +320,41 @@ This document provides a comprehensive overview of the Entity Relationship Diagr
    - `category_id` in **Products** references `id` in **Categories**.
    - `user_id` in **Orders** references `id` in **Users**.
    - `order_id` and `product_id` in **Order_Items** reference `id` in **Orders** and **Products**, respectively.
-   
+
 This structure provides a normalized relational database that ensures data consistency and efficient inventory tracking. The relationships defined in the ERD facilitate effective data management and retrieval, making it easier to maintain the integrity of the database while supporting various operations related to e-commerce.
 
 This structure provides a **normalized relational database** that ensures **data consistency** and **efficient inventory tracking**.
 
 ---
 ## 🙏 Credit & Acknowledgments
+This document serves to recognize and express gratitude to the individuals and resources that have significantly contributed to the development and success of this project. Acknowledging the support and tools that have facilitated our work is essential in fostering a collaborative environment and promoting the spirit of community in software development.
+
+- **Mentors** Rachel Furlong and Spencer Barriball :
+Rachel Furlong: For her invaluable guidance and insights throughout the project.
+
+Spencer Barriball: For his expertise and support, helping to navigate challenges effectively.
 - **Bootstrap** for UI styling.
+Bootstrap: For providing a robust framework for UI styling, enabling a responsive and visually appealing design.
+
 - **Django Documentation** for backend support.
+Django Documentation: For serving as a comprehensive resource for backend development, ensuring best practices and efficient coding.
 - **Pandas** for handling CSV/Excel uploads.
-- **GitHub & Open-Source Community** for valuable resources.
+Pandas: For its powerful capabilities in handling CSV and Excel uploads, streamlining data processing and analysis.
+- **GitHub & Open-Source Community** 
+GitHub & Open-Source Community: For offering a wealth of resources, tutorials, and collaborative opportunities that have enriched the development experience.
+
+This acknowledgment is a testament to the collaborative efforts and resources that have made this project possible. Thank you to everyone involved!
 
 ---
 ## 🎉 Conclusion
 This **Inventory Management System** simplifies inventory tracking and product management for businesses. Future improvements will enhance automation, analytics, and reporting features.
+This document provides a concise overview of the Inventory Management System, highlighting its capabilities in streamlining inventory tracking and product management for businesses. As we look to the future, there are plans for enhancements that will further improve automation, analytics, and reporting features, ensuring that the system remains robust and effective in meeting the evolving needs of users.
+
+The Inventory Management System is designed to simplify the complexities of inventory control, allowing businesses to maintain accurate stock levels, reduce waste, and optimize their supply chain processes. By implementing this system, organizations can expect to see increased efficiency and better decision-making based on real-time data.
+
+Future improvements will focus on integrating advanced automation tools that will minimize manual input and reduce the risk of human error. Enhanced analytics capabilities will provide deeper insights into inventory trends and performance metrics, enabling businesses to make informed strategic decisions. Additionally, upgraded reporting features will allow for more customizable and comprehensive reports, facilitating better communication and understanding of inventory status across all levels of the organization.
+
+In conclusion, the Inventory Management System is a vital tool for businesses looking to improve their inventory processes. With ongoing enhancements, it promises to deliver even greater value and support for effective inventory management in the future.
 
 💡 **Feel free to fork, improve, and contribute to the project!** 🚀
 
