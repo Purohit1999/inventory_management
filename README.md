@@ -575,6 +575,9 @@ GitHub & Open-Source Community: For offering a wealth of resources, tutorials, a
 
 This acknowledgment is a testament to the collaborative efforts and resources that have made this project possible. Thank you to everyone involved!
 
+- UI/UX design prototypes were created using **Balsamiq Wireframes**, a low-fidelity wireframing tool that helped visualize the application's structure and user interactions during the planning phase.
+
+
 ---
 ## 🎉 Conclusion
 This **Inventory Management System** simplifies inventory tracking and product management for businesses. Future improvements will enhance automation, analytics, and reporting features.
