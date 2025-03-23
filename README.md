@@ -63,19 +63,15 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 
 User Stories for Inventory Management System
 
-
-
 This document outlines the user stories for an Inventory Management System, detailing the needs and requirements of both business owners and store employees. The goal is to create a user-friendly platform that streamlines inventory management, enhances productivity, and ensures security.
-
-#### User Stories
 
 ### 🧑‍💻 As a Business Owner, I want to:
 
-## 1. Easily add and manage inventory to keep track of available products.
+#### 1. Easily add and manage inventory to keep track of available products.
 
 This feature allows business owners to quickly input new products and update existing ones, ensuring that inventory levels are accurate and up-to-date.
 
-## 2. Bulk upload inventory from CSV/Excel to save time in data entry.
+#### 2. Bulk upload inventory from CSV/Excel to save time in data entry.
 
 By enabling bulk uploads, business owners can efficiently manage large inventories without the need for repetitive manual entry, thus saving valuable time.
 
