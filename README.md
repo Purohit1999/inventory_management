@@ -571,5 +571,9 @@ Future improvements will focus on integrating advanced automation tools that wil
 
 In conclusion, the Inventory Management System is a vital tool for businesses looking to improve their inventory processes. With ongoing enhancements, it promises to deliver even greater value and support for effective inventory management in the future.
 
-💡 **Feel free to fork, improve, and contribute to the project!** 🚀
+## License
+
+💡 This project is licensed under the [MIT License](LICENSE).  
+Feel free to use, modify, and distribute it under the terms of the license. **🚀
+
 
