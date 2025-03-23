@@ -28,7 +28,9 @@ Sales Reports: The system generates detailed sales reports, providing insights i
 Inventory Reports: Users can access inventory reports to analyze stock levels, turnover rates, and other key metrics.
 
 ### Getting Started :
+
 To get started with the Inventory Management System, users need to create an account and log in. Once logged in, users can access the dashboard where they can manage their inventory, upload product data, and generate reports.
+
 ---
 ## 📖 Table of Contents
 1. [🔍 Project Overview](#-project-overview)
