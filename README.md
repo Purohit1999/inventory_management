@@ -8,6 +8,7 @@ This application helps businesses efficiently manage their product inventory, in
 Visit the live project [here](https://inventory-mgmt-system-8e7f20e57e43.herokuapp.com).
 
 ### 1. Product Management
+![Homepage](images/app.png)
 Add Products: Users can easily add new products to the inventory by filling out a simple form with necessary details such as product name, description, price, and quantity.
 Update Products: Existing products can be updated to reflect changes in pricing, stock levels, or product descriptions.
 Delete Products: Users have the option to remove products from the inventory that are no longer available or needed.
@@ -108,9 +109,14 @@ This document serves as a foundational guide for developing an Inventory Managem
 
 ---
 ## 🎨 UX/UI Design
-![Homepage](images/homepage.png)
-![Homepage](images/homepage.png)
-![Homepage](images/homepage.png)
+### Desktop View :
+![Homepage](images/w3.png)
+
+### Tablet View :
+![Homepage](images/w2.png)
+
+### Mobile View :
+![Homepage](images/w1.png)
 
 ### 💡 Design Principles:
 This document outlines a proposed UI and UX design for the Inventory Management System website. The aim is to enhance user experience by creating an intuitive, visually appealing, and efficient interface that meets the needs of users managing inventory. The design will focus on usability, accessibility, and aesthetics to ensure a seamless interaction with the system.
@@ -159,19 +165,19 @@ The proposed UI and UX design for the Inventory Management System aims to create
 ### 🖥️ Screenshots:
 #### ✅ Home Page
 - Displays all products with an option to add, edit, delete, or upload new products.
-![Homepage](images/homepage.png)
+![Homepage](images/home.png)
 
 #### ✅ Edit Product Page (Improved Layout)
 - User-friendly product editing interface with clear labels and spacing.
-![EDIT PRODUCT](images/homepage.png)
+![EDIT PRODUCT](images/edit_product.png)
 
 #### ✅ Upload CSV/Excel Page (Now Functional)
 - Enhanced file upload validation with clear messages and confirmation prompts.
-![UPLOD](images/homepage.png)
+![UPLOD](images/upload.png)
 
 #### ✅ User Authentication
 - Secure login/logout system with session management.
-![LOGIN](images/homepage.png)
+![LOGIN](images/authntication.png)
 
 ---
 ## 🛠️ Technologies Used
@@ -279,13 +285,13 @@ Each user story has been tested to confirm the system meets its intended purpose
 
 #### **🔍 Solved Bugs**
 1. **CSV Upload Not Working:**  
-![BUG](images/homepage.png)
+![BUG](images/error2.png)
 
    - **Issue:** The system did not correctly parse CSV headers, causing upload failures.  
    - **Fix:** Implemented dynamic column mapping and validation for uploaded files.
 
 2. **Broken Logout Redirect:**  
-![BUG](images/homepage.png)
+![BUG](images/login_error.png)
 
    - **Issue:** Users remained logged in even after clicking "Logout."  
    - **Fix:** Ensured Django’s `logout()` function properly cleared sessions.
@@ -297,7 +303,7 @@ Each user story has been tested to confirm the system meets its intended purpose
    - **Fix:** Added a **JavaScript confirmation popup** before deletion.
 
 4. **CSS Styling Issues in Mobile View:**  
-![BUG](images/homepage.png)
+![BUG](images/deletbutton.png)
 
    - **Issue:** Some elements were overlapping on smaller screens.  
    - **Fix:** Adjusted CSS for better mobile responsiveness.
@@ -328,9 +334,11 @@ To ensure **code quality and compliance**, **Python validation tools** were used
 | **CSS Validation** | W3C CSS Validator | ✅ Passed |
 | **JavaScript Validation** | ESLint & JSHint | ✅ Passed |
 | **Django Security Checks** | `python manage.py check --deploy` | ✅ Passed |
-![HTML](images/homepage.png)
-![CSS](images/homepage.png)
-![JSHint](images/homepage.png)
+![HTML](images/html_valid.png)
+![CSS](images/css_valid.png)
+![JSHint](images/jshint.png)
+![Lighthouse](images/lighthouse_report.png)
+
 
 All **Python scripts follow PEP8 standards**, and Django’s security checks confirm no major vulnerabilities.
 
@@ -341,10 +349,10 @@ Testing has ensured that the **Inventory Management System** is **fully function
 
 ---
 ## 🗄️ Database
-![DB](images/homepage.png)
+![DB](images/dj_dbs.png)
 
 - **Database Used:** SQLite3
-![DB](images/homepage.png)
+![DB](images/dbs.png)
 
 - **Tables Managed:**
   - `Product` – Stores all product-related data including name, price, stock, and category.
@@ -354,8 +362,9 @@ Testing has ensured that the **Inventory Management System** is **fully function
   - Data is validated before insertion to prevent inconsistencies.
 
 ### **Entity Relationship Diagram (ERD)**:
+![ERD](images/ERD1.png)
 This document provides a comprehensive overview of the Entity Relationship Diagram (ERD) for a relational database that manages products, users, categories, orders, and order items. The ERD illustrates the relationships between these entities and outlines their attributes, ensuring a clear understanding of how data is organized and interrelated within the system.
-![ERD](images/homepage.png)
+
 
 
 | **Products**  | **Users**  | **Categories** | **Orders**  | **Order_Items**  |
@@ -572,6 +581,6 @@ In conclusion, the Inventory Management System is a vital tool for businesses lo
 ## License
 
 💡 This project is licensed under the [MIT License](https://github.com/Purohit1999/inventory_management/blob/main/inventory_management/LICENSE).  
-Feel free to use, modify, and distribute it under the terms of the license. **🚀
+Feel free to use, modify, and distribute it under the terms of the license. 🚀
 
 
