@@ -402,9 +402,6 @@ This structure provides a normalized relational database that ensures data consi
 This structure provides a **normalized relational database** that ensures **data consistency** and **efficient inventory tracking**.
 
 ---
-Absolutely! Here's an enhanced and more detailed **Deployment** section for your `README.md`, including a proper description explaining the tools, purpose, and deployment pipeline clearly:
-
----
 
 ## 🚀 Deployment
 
