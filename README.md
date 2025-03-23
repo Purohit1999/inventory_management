@@ -48,6 +48,9 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 
 ---
 ## 🎨 UX/UI Design
+![Homepage](images/homepage.png)
+![Homepage](images/homepage.png)
+![Homepage](images/homepage.png)
 
 ### 💡 Design Principles:
 - **Simplicity:** Minimalist and intuitive user interface.
@@ -58,15 +61,19 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 ### 🖥️ Screenshots:
 #### ✅ Home Page
 - Displays all products with an option to add, edit, delete, or upload new products.
+![Homepage](images/homepage.png)
 
 #### ✅ Edit Product Page (Improved Layout)
 - User-friendly product editing interface with clear labels and spacing.
+![EDIT PRODUCT](images/homepage.png)
 
 #### ✅ Upload CSV/Excel Page (Now Functional)
 - Enhanced file upload validation with clear messages and confirmation prompts.
+![UPLOD](images/homepage.png)
 
 #### ✅ User Authentication
 - Secure login/logout system with session management.
+![LOGIN](images/homepage.png)
 
 ---
 ## 🛠️ Technologies Used
@@ -133,9 +140,7 @@ Ensuring the **Inventory Management System** functions correctly across differen
 | **Responsiveness**        | Good       | Good       | Good        | Good     |
 
 ---
-Here is the updated **Testing** section of your **README.md**, now including subheadings for **Testing User Stories, Manual Testing, Bugs & Error Checking, Solved Bugs, Known Bugs, and Python Validation**.
 
----
 ### **📌 Testing User Stories**
 Each user story has been tested to confirm the system meets its intended purpose.
 
@@ -176,18 +181,26 @@ Each user story has been tested to confirm the system meets its intended purpose
 
 #### **🔍 Solved Bugs**
 1. **CSV Upload Not Working:**  
+![BUG](images/homepage.png)
+
    - **Issue:** The system did not correctly parse CSV headers, causing upload failures.  
    - **Fix:** Implemented dynamic column mapping and validation for uploaded files.
 
 2. **Broken Logout Redirect:**  
+![BUG](images/homepage.png)
+
    - **Issue:** Users remained logged in even after clicking "Logout."  
    - **Fix:** Ensured Django’s `logout()` function properly cleared sessions.
 
 3. **Delete Button Instantly Deleting Without Confirmation:**  
+![BUG](images/homepage.png)
+
    - **Issue:** Clicking "Delete" immediately removed products without warning.  
    - **Fix:** Added a **JavaScript confirmation popup** before deletion.
 
 4. **CSS Styling Issues in Mobile View:**  
+![BUG](images/homepage.png)
+
    - **Issue:** Some elements were overlapping on smaller screens.  
    - **Fix:** Adjusted CSS for better mobile responsiveness.
 
@@ -208,6 +221,7 @@ Despite rigorous testing, the following **minor issues** are present:
 
 ### **🐍 Python Validation**
 To ensure **code quality and compliance**, **Python validation tools** were used:
+![PEP8](images/homepage.png)
 
 | **Validation Type** | **Tool Used** | **Status** |
 |--------------------|--------------|------------|
@@ -216,6 +230,9 @@ To ensure **code quality and compliance**, **Python validation tools** were used
 | **CSS Validation** | W3C CSS Validator | ✅ Passed |
 | **JavaScript Validation** | ESLint & JSHint | ✅ Passed |
 | **Django Security Checks** | `python manage.py check --deploy` | ✅ Passed |
+![HTML](images/homepage.png)
+![CSS](images/homepage.png)
+![JSHint](images/homepage.png)
 
 All **Python scripts follow PEP8 standards**, and Django’s security checks confirm no major vulnerabilities.
 
@@ -226,8 +243,11 @@ Testing has ensured that the **Inventory Management System** is **fully function
 
 ---
 ## 🗄️ Database
+![DB](images/homepage.png)
 
 - **Database Used:** SQLite3
+![DB](images/homepage.png)
+
 - **Tables Managed:**
   - `Product` – Stores all product-related data including name, price, stock, and category.
   - `Users` – Manages authentication and access control.
@@ -236,6 +256,8 @@ Testing has ensured that the **Inventory Management System** is **fully function
   - Data is validated before insertion to prevent inconsistencies.
 
 ### **Entity Relationship Diagram (ERD)**:
+![ERD](images/homepage.png)
+
 
 | **Products**  | **Users**  | **Categories** | **Orders**  | **Order_Items**  |
 |--------------|------------|---------------|-------------|------------------|
@@ -247,6 +269,8 @@ Testing has ensured that the **Inventory Management System** is **fully function
 | `category_id` (FK) |    |               |             |                  |
 
 ### **Relationships**:
+![ERD](images/homepage.png)
+
 1. **One-to-Many:** A **Category** can have multiple **Products**, but each product belongs to only one category.
 2. **One-to-Many:** A **User** can place multiple **Orders**, but an order belongs to one user.
 3. **Many-to-Many:** **Orders** contain multiple **Products**, and a product can belong to multiple orders (handled through the **Order_Items** table).
