@@ -385,6 +385,162 @@ This structure provides a normalized relational database that ensures data consi
 This structure provides a **normalized relational database** that ensures **data consistency** and **efficient inventory tracking**.
 
 ---
+Absolutely! Here's an enhanced and more detailed **Deployment** section for your `README.md`, including a proper description explaining the tools, purpose, and deployment pipeline clearly:
+
+---
+
+```markdown
+## 🚀 Deployment
+
+This project — **Inventory Management System** — is a full-stack Django-based web application designed to help users manage product inventories efficiently. The system allows CRUD operations on products, supports file uploads, and is styled using Bootstrap for responsive design.
+
+To ensure accessibility and availability, the project is **hosted publicly on GitHub** and **deployed live using Heroku**, making it easy for users, collaborators, or evaluators to view and interact with the application without setting it up locally.
+
+---
+
+### 🔗 Live Website
+
+Click here to access the live application:  
+➡️ [Inventory Management System](https://inventory-mgmt-system-8e7f20e57e43.herokuapp.com)
+
+---
+
+### 📁 GitHub Repository
+
+You can view or clone the source code from the GitHub repository:  
+📦 [GitHub Repository Link](https://github.com/your-username/inventory-management)
+
+---
+
+### 🛠️ Deployment Architecture
+
+The application is deployed using **Heroku**, a cloud platform that enables easy deployment and scaling of web applications. The deployment includes:
+
+- A **PostgreSQL** database connection (via Heroku’s add-ons or `dj_database_url`)
+- **Whitenoise** middleware to efficiently serve static files
+- **Gunicorn** as the production-ready WSGI server
+- Environment variables managed securely through Heroku Config Vars
+- `runtime.txt`, `Procfile`, and `requirements.txt` configured to match Heroku's build requirements
+
+---
+
+### 🌐 Steps to Deploy on Heroku
+This document outlines the step-by-step process for manually deploying a project on Heroku. It covers everything from installing the Heroku CLI to setting environment variables and testing the deployment. By following these instructions, you will be able to successfully deploy your application and ensure it runs smoothly in a production environment.
+
+## 🚀 Deployment
+
+This project — **Inventory Management System** — is a full-stack Django-based web application designed to help users manage product inventories efficiently. The system allows CRUD operations on products, supports file uploads, and is styled using Bootstrap for responsive design.
+
+To ensure accessibility and availability, the project is **hosted publicly on GitHub** and **deployed live using Heroku**, making it easy for users, collaborators, or evaluators to view and interact with the application without setting it up locally.
+
+---
+
+### 🔗 Live Website
+
+Click here to access the live application:  
+➡️ [Inventory Management System](https://inventory-mgmt-system-8e7f20e57e43.herokuapp.com)
+
+---
+
+### 📁 GitHub Repository
+
+You can view or clone the source code from the GitHub repository:  
+📦 [GitHub Repository Link](https://github.com/Purohit1999/inventory-management)
+
+---
+
+### 🛠️ Deployment Architecture
+
+The application is deployed using **Heroku**, a cloud platform that enables easy deployment and scaling of web applications. The deployment includes:
+
+- A **PostgreSQL** database connection (via Heroku’s add-ons or `dj_database_url`)
+- **Whitenoise** middleware to efficiently serve static files
+- **Gunicorn** as the production-ready WSGI server
+- Environment variables managed securely through Heroku Config Vars
+- `runtime.txt`, `Procfile`, and `requirements.txt` configured to match Heroku's build requirements
+
+---
+
+### 🌐 Steps to Deploy on Heroku
+
+Follow the steps below to deploy the project on Heroku manually:
+
+#### 1. **Install Heroku CLI**
+Download and install the Heroku CLI from:  
+https://devcenter.heroku.com/articles/heroku-cli
+
+#### 2. **Login to Heroku**
+```bash
+heroku login
+
+
+Follow the steps below to deploy the project on Heroku manually:
+
+#### 1. **Install Heroku CLI**
+Download and install the Heroku CLI from:  
+https://devcenter.heroku.com/articles/heroku-cli
+
+#### 2. **Login to Heroku**
+```bash
+heroku login
+```
+
+#### 3. **Create a New Heroku App**
+```bash
+heroku create inventory-mgmt-system
+```
+
+#### 4. **Add Heroku Remote to Git**
+```bash
+heroku git:remote -a inventory-mgmt-system
+```
+
+#### 5. **Set Buildpacks**
+```bash
+heroku buildpacks:set heroku/python
+heroku buildpacks:add --index 1 heroku/nodejs
+```
+
+#### 6. **Push Code to Heroku**
+```bash
+git push heroku main
+```
+
+#### 7. **Run Database Migrations**
+```bash
+heroku run python manage.py migrate
+```
+
+#### 8. **(Optional) Create Superuser**
+```bash
+heroku run python manage.py createsuperuser
+```
+
+---
+
+### 🔐 Environment Variables
+
+Make sure to set these variables in your Heroku Dashboard under **Settings > Config Vars**:
+
+| Key               | Example Value                       | Description                          |
+|------------------|-------------------------------------|--------------------------------------|
+| `DJANGO_SECRET_KEY` | your-django-secret-key              | Secret key for Django project        |
+| `DEBUG`           | `False`                              | Ensures production mode is on        |
+| `DATABASE_URL`    | Provided by Heroku PostgreSQL add-on | Database connection string           |
+| `HEROKU_APP_NAME` | `inventory-mgmt-system`              | App name used for CSRF config        |
+
+---
+
+### 🧪 Deployment Testing
+
+Once deployed:
+
+- Visit your Heroku app URL to test live functionality
+- Check responsiveness on multiple devices
+- Login/logout functionality
+- Verify static file loading, file uploads, and admin panel (if enabled)
+
+---
 ## 🙏 Credit & Acknowledgments
 This document serves to recognize and express gratitude to the individuals and resources that have significantly contributed to the development and success of this project. Acknowledging the support and tools that have facilitated our work is essential in fostering a collaborative environment and promoting the spirit of community in software development.
 
