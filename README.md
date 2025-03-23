@@ -460,7 +460,7 @@ Click here to access the live application:
 ### 📁 GitHub Repository
 
 You can view or clone the source code from the GitHub repository:  
-📦 [GitHub Repository Link](https://github.com/Purohit1999/inventory-management)
+📦 [GitHub Repository Link](https://github.com/Purohit1999/inventory_management)
 
 ---
 
