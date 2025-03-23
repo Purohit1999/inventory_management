@@ -575,7 +575,7 @@ In conclusion, the Inventory Management System is a vital tool for businesses lo
 
 ## License
 
-💡 This project is licensed under the [MIT License](LICENSE).  
+💡 This project is licensed under the [MIT License](https://github.com/Purohit1999/inventory_management/blob/main/inventory_management/LICENSE).  
 Feel free to use, modify, and distribute it under the terms of the license. **🚀
 
 
