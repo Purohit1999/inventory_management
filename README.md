@@ -325,7 +325,7 @@ Despite rigorous testing, the following **minor issues** are present:
 
 ### **🐍 Python Validation**
 To ensure **code quality and compliance**, **Python validation tools** were used:
-![PEP8](images/homepage.png)
+![PEP8](images/pep8_validation.png)
 
 | **Validation Type** | **Tool Used** | **Status** |
 |--------------------|--------------|------------|
@@ -334,9 +334,17 @@ To ensure **code quality and compliance**, **Python validation tools** were used
 | **CSS Validation** | W3C CSS Validator | ✅ Passed |
 | **JavaScript Validation** | ESLint & JSHint | ✅ Passed |
 | **Django Security Checks** | `python manage.py check --deploy` | ✅ Passed |
+
+### HTML Validation :
 ![HTML](images/html_valid.png)
+
+### CSS Validation : 
 ![CSS](images/css_valid.png)
+
+### JavaScript Validation : 
 ![JSHint](images/jshint.png)
+
+### LightHouse Report :
 ![Lighthouse](images/lighthouse_report.png)
 
 
@@ -377,7 +385,7 @@ This document provides a comprehensive overview of the Entity Relationship Diagr
 | `category_id` (FK) |    |               |             |                  |
 
 ### **Relationships**:
-![ERD](images/homepage.png)
+![ERD](images/erd_digram2.png)
 
 1. **One-to-Many:** A **Category** can have multiple **Products**, but each product belongs to only one category.
 2. **One-to-Many:** A **User** can place multiple **Orders**, but an order belongs to one user.
@@ -396,12 +404,13 @@ Absolutely! Here's an enhanced and more detailed **Deployment** section for your
 
 ---
 
-```markdown
 ## 🚀 Deployment
 
+![ERD](images/deploy.png)
 This project — **Inventory Management System** — is a full-stack Django-based web application designed to help users manage product inventories efficiently. The system allows CRUD operations on products, supports file uploads, and is styled using Bootstrap for responsive design.
 
 To ensure accessibility and availability, the project is **hosted publicly on GitHub** and **deployed live using Heroku**, making it easy for users, collaborators, or evaluators to view and interact with the application without setting it up locally.
+![ERD](images/deployment.png)
 
 ---
 
