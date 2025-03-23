@@ -1,4 +1,5 @@
 # 📦 Inventory Management System
+![Homepage](images/responsive.png)
 
 Welcome to the **Inventory Management System**! This application helps businesses efficiently manage their product inventory, including adding, updating, deleting, and uploading product data via CSV/Excel files.
 
