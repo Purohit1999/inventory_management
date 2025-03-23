@@ -2,6 +2,9 @@
 ![Homepage](images/responsive.png)
 
 Welcome to the **Inventory Management System**! This application helps businesses efficiently manage their product inventory, including adding, updating, deleting, and uploading product data via CSV/Excel files.
+### 🌐 Website
+
+Visit the live project [here](https://inventory-mgmt-system-8e7f20e57e43.herokuapp.com).
 
 ---
 ## 📖 Table of Contents
@@ -53,10 +56,48 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 ![Homepage](images/homepage.png)
 
 ### 💡 Design Principles:
+This document outlines a proposed UI and UX design for the Inventory Management System website. The aim is to enhance user experience by creating an intuitive, visually appealing, and efficient interface that meets the needs of users managing inventory. The design will focus on usability, accessibility, and aesthetics to ensure a seamless interaction with the system.
+
+### Design Goals
+
+User-Centric Approach: Prioritize the needs and preferences of users to create a more engaging experience.
+
+Intuitive Navigation: Simplify navigation to allow users to find information quickly and efficiently.
+
+Visual Hierarchy: Use design elements to guide users' attention to important features and information.
+
+Responsive Design: Ensure the website is fully functional across various devices and screen sizes.
+
+### Typography
+
+Headings: Bold sans-serif font for clarity and emphasis.
+
+Body Text: A clean, easy-to-read serif font for improved legibility.
+
+Font Size: Use a hierarchy of font sizes to differentiate between headings, subheadings, and body text.
+
+Accessibility: Implement features that make the website usable for individuals with disabilities.
+
+### Buttons and Icons
+
+Buttons: Rounded corners with hover effects to indicate interactivity. Use clear labels like "Add Item," "Edit," and "Delete."
+
+Icons: Utilize universally recognized icons for actions (e.g., plus sign for adding, pencil for editing) to enhance understandi
+
+### Mobile Responsiveness
+
+Adaptive Layout: Ensure that all elements adjust seamlessly to fit smaller screens without losing functionality.
+
+Touch-Friendly Design: Increase button sizes and spacing for easier navigation on mobile devices.
+
 - **Simplicity:** Minimalist and intuitive user interface.
 - **Responsiveness:** Works on desktop and mobile devices.
 - **Consistency:** Uses a uniform design across all pages.
 - **Error Handling:** Provides clear feedback messages for user actions.
+
+### Conclusion
+
+The proposed UI and UX design for the Inventory Management System aims to create a user-friendly environment that enhances productivity and satisfaction. By focusing on intuitive navigation, visual appeal, and accessibility, this design will help users manage their inventory more effectively and efficiently. Implementing these changes will not only improve the overall user experience but also encourage user engagement and retention.
 
 ### 🖥️ Screenshots:
 #### ✅ Home Page
@@ -256,6 +297,7 @@ Testing has ensured that the **Inventory Management System** is **fully function
   - Data is validated before insertion to prevent inconsistencies.
 
 ### **Entity Relationship Diagram (ERD)**:
+This document provides a comprehensive overview of the Entity Relationship Diagram (ERD) for a relational database that manages products, users, categories, orders, and order items. The ERD illustrates the relationships between these entities and outlines their attributes, ensuring a clear understanding of how data is organized and interrelated within the system.
 ![ERD](images/homepage.png)
 
 
@@ -278,6 +320,8 @@ Testing has ensured that the **Inventory Management System** is **fully function
    - `category_id` in **Products** references `id` in **Categories**.
    - `user_id` in **Orders** references `id` in **Users**.
    - `order_id` and `product_id` in **Order_Items** reference `id` in **Orders** and **Products**, respectively.
+   
+This structure provides a normalized relational database that ensures data consistency and efficient inventory tracking. The relationships defined in the ERD facilitate effective data management and retrieval, making it easier to maintain the integrity of the database while supporting various operations related to e-commerce.
 
 This structure provides a **normalized relational database** that ensures **data consistency** and **efficient inventory tracking**.
 
