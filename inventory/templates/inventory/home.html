@@ -1,8 +1,32 @@
-{% extends 'inventory/base.html' %}
-
-{% block title %}Home - Inventory{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1 class="text-center mt-5">Welcome to Inventory Management</h1>
-    <p class="text-center">Manage your products efficiently and easily.</p>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Login Card -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h4 class="card-title">🔐 Login</h4>
+          <p class="card-text">Access your inventory dashboard securely.</p>
+          <a href="{% url 'login' %}" class="btn btn-primary">Login Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Inventory Card -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h4 class="card-title">📦 What is Inventory Management?</h4>
+          <p class="card-text">
+            Inventory management involves tracking, storing, and managing products efficiently, ensuring businesses meet demand without overstocking or running out.
+          </p>
+          <a href="{% url 'product_list' %}" class="btn btn-outline-success">Explore Products</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
