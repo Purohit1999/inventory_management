@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.log
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# VSCode/IDE/editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS/System files
+.DS_Store
+Thumbs.db
+
+# Django files
+*.sqlite3
+*.bak
+db.sqlite3
+media/
+
+# Secrets & environment
+.env
+
+# Static files collected for deployment
+staticfiles/
+
+# Heroku
+*.orig
