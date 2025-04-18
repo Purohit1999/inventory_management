@@ -1,5 +1,5 @@
-import os 
 from pathlib import Path
+from decouple import config
 import dj_database_url
 
 # ===========================
@@ -8,14 +8,13 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ✅ Security Key (Keep Secret in Production)
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "3fM2QpX1L0iW5m7dO9kG-JR8yF6cT4aY2pNbVZqHdXs=")
+# ✅ Load secret key and debug from .env using decouple
+SECRET_KEY = config("SECRET_KEY", default="please-change-this-in-prod")
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-# ✅ Debug Mode (Only Enable for Local Development)
-DEBUG = os.getenv("DEBUG", "False") == "True"
+# ✅ Allowed Hosts and CSRF Trusted Origins
+HEROKU_APP_NAME = config("HEROKU_APP_NAME", default="inventory-mgmt-system")
 
-# ✅ Allowed Hosts (Update for Deployment)
-HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME", "inventory-mgmt-system")
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
@@ -23,14 +22,13 @@ ALLOWED_HOSTS = [
     ".herokuapp.com",
 ]
 
-# ✅ CSRF Trusted Origins (Avoid Cross-Site Request Forgery Issues)
 CSRF_TRUSTED_ORIGINS = [
     f"https://{HEROKU_APP_NAME}.herokuapp.com",
     "https://*.herokuapp.com",
 ]
 
 # ===========================
-# ✅ INSTALLED APPLICATIONS
+# ✅ INSTALLED APPS
 # ===========================
 
 INSTALLED_APPS = [
@@ -40,21 +38,21 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",  # ✅ API Support
-    "corsheaders",  # ✅ CORS Support for External API Calls
-    "whitenoise.runserver_nostatic",  # ✅ Static Files Compression
-    "inventory",  # ✅ Your Inventory App
+    "rest_framework",
+    "corsheaders",
+    "whitenoise.runserver_nostatic",
+    "inventory",
 ]
 
 # ===========================
-# ✅ MIDDLEWARE CONFIGURATION
+# ✅ MIDDLEWARE
 # ===========================
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # ✅ Faster Static Files Serving
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",  # ✅ Enable Cross-Origin Requests
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -63,14 +61,14 @@ MIDDLEWARE = [
 ]
 
 # ===========================
-# ✅ URL CONFIGURATION
+# ✅ URL Configuration
 # ===========================
 
 ROOT_URLCONF = "inventory_management.urls"
 WSGI_APPLICATION = "inventory_management.wsgi.application"
 
 # ===========================
-# ✅ TEMPLATES CONFIGURATION
+# ✅ Templates
 # ===========================
 
 TEMPLATES = [
@@ -93,20 +91,16 @@ TEMPLATES = [
 ]
 
 # ===========================
-# ✅ DATABASE CONFIGURATION (PostgreSQL for Heroku)
+# ✅ Database
 # ===========================
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-
+DATABASE_URL = config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-    )
+    "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600),
 }
 
 # ===========================
-# ✅ AUTHENTICATION SETTINGS
+# ✅ Authentication
 # ===========================
 
 AUTHENTICATION_BACKENDS = [
@@ -118,7 +112,7 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 # ===========================
-# ✅ STATIC & MEDIA FILES CONFIGURATION
+# ✅ Static and Media Files
 # ===========================
 
 STATIC_URL = "/static/"
@@ -130,26 +124,26 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # ===========================
-# ✅ SECURITY SETTINGS (For Deployment)
+# ✅ Security Settings
 # ===========================
 
 SECURE_SSL_REDIRECT = not DEBUG and "HEROKU" in os.environ
-SECURE_HSTS_SECONDS = 31536000  # 1 Year
+SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-X_FRAME_OPTIONS = "ALLOWALL"  # ✅ Allows embedding in "Am I Responsive"
+X_FRAME_OPTIONS = "ALLOWALL"
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # ===========================
-# ✅ CORS CONFIGURATION (For APIs & "Am I Responsive" Support)
+# ✅ CORS Configuration
 # ===========================
 
-CORS_ALLOW_ALL_ORIGINS = True  # ✅ Allows all origins (for embedding)
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 # ===========================
-# ✅ LOGGING CONFIGURATION (For Debugging & Production)
+# ✅ Logging
 # ===========================
 
 LOGGING = {
@@ -167,7 +161,7 @@ LOGGING = {
 }
 
 # ===========================
-# ✅ DEFAULT SETTINGS
+# ✅ Default Auto Field
 # ===========================
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
