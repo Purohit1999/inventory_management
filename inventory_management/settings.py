@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import config
 import dj_database_url
+import os  # 🔧 Needed for environment check in security settings
 
 # ===========================
 # ✅ BASE CONFIGURATION
@@ -8,11 +9,9 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ✅ Load secret key and debug from .env using decouple
 SECRET_KEY = config("SECRET_KEY", default="please-change-this-in-prod")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-# ✅ Allowed Hosts and CSRF Trusted Origins
 HEROKU_APP_NAME = config("HEROKU_APP_NAME", default="inventory-mgmt-system")
 
 ALLOWED_HOSTS = [
@@ -68,15 +67,15 @@ ROOT_URLCONF = "inventory_management.urls"
 WSGI_APPLICATION = "inventory_management.wsgi.application"
 
 # ===========================
-# ✅ Templates
+# ✅ TEMPLATES
 # ===========================
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / "templates",
-            BASE_DIR / "inventory/templates",
+            BASE_DIR / "templates",                      # 🔧 global templates (e.g. base.html)
+            BASE_DIR / "inventory" / "templates",        # app-specific templates
         ],
         "APP_DIRS": True,
         "OPTIONS": {
