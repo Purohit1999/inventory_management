@@ -1,7 +1,7 @@
 from pathlib import Path
 from decouple import config
 import dj_database_url
-import os  # 🔧 Needed for environment check in security settings
+import os
 
 # ===========================
 # ✅ BASE CONFIGURATION
@@ -37,11 +37,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Third-party apps
     "rest_framework",
     "corsheaders",
     "whitenoise.runserver_nostatic",
-    "inventory",
     "widget_tweaks",
+
+    # Local apps
+    "inventory",
 ]
 
 # ===========================
@@ -75,8 +79,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / "templates",                      # 🔧 global templates (e.g. base.html)
-            BASE_DIR / "inventory" / "templates",        # app-specific templates
+            BASE_DIR / "templates",
+            BASE_DIR / "inventory" / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -91,16 +95,18 @@ TEMPLATES = [
 ]
 
 # ===========================
-# ✅ Database
+# ✅ DATABASE CONFIGURATION
 # ===========================
 
-DATABASE_URL = config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 DATABASES = {
-    "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600),
+    "default": dj_database_url.config(
+        default=config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        conn_max_age=600
+    )
 }
 
 # ===========================
-# ✅ Authentication
+# ✅ AUTHENTICATION SETTINGS
 # ===========================
 
 AUTHENTICATION_BACKENDS = [
@@ -112,46 +118,59 @@ LOGIN_REDIRECT_URL = "/products"
 LOGOUT_REDIRECT_URL = "/"
 
 # ===========================
-# ✅ Static and Media Files
+# ✅ STATIC & MEDIA FILES
 # ===========================
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"] if (BASE_DIR / "static").exists() else []
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# For Heroku: Enable whitenoise in both local & production
+STATICFILES_STORAGE = (
+    "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    if "DYNO" in os.environ
+    else "django.contrib.staticfiles.storage.StaticFilesStorage"
+)
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # ===========================
-# ✅ Security Settings
+# ✅ SECURITY SETTINGS
 # ===========================
 
-SECURE_SSL_REDIRECT = not DEBUG and "HEROKU" in os.environ
+SECURE_SSL_REDIRECT = not DEBUG and "DYNO" in os.environ
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-X_FRAME_OPTIONS = "ALLOWALL"
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = "SAMEORIGIN"  # SAFER option than "ALLOWALL"
 
 # ===========================
-# ✅ CORS Configuration
+# ✅ CORS SETTINGS
 # ===========================
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 # ===========================
-# ✅ Logging
+# ✅ LOGGING
 # ===========================
 
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "[{levelname}] {message}",
+            "style": "{",
+        },
+    },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
+            "formatter": "simple",
         },
     },
     "root": {
@@ -161,7 +180,7 @@ LOGGING = {
 }
 
 # ===========================
-# ✅ Default Auto Field
+# ✅ AUTO FIELD
 # ===========================
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
