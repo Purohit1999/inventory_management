@@ -12,13 +12,27 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter product name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Enter product description'}),
-            'price': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter price'}),
-            'stock': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter stock quantity'}),
-            'category': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter category'}),
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter product name'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Enter product description'
+            }),
+            'price': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter price'
+            }),
+            'stock': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter stock quantity'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'form-select'
+            }),  # 👈 This makes it a dropdown
         }
-
 
 # ==============================
 # ✅ File Upload Form (For CSV/Excel)
