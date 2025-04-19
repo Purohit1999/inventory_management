@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
 
 # ✅ Import custom views
 from inventory import views
@@ -15,10 +15,11 @@ urlpatterns = [
     # ✅ Inventory App URLs (including home page at '/')
     path('', include(('inventory.urls', 'inventory'), namespace='inventory')),
 
-    # ✅ Contact Page Route (optional - already in app URLs)
+    # ✅ Contact Page Route
     path('contact/', contact_page, name='contact'),
 
-    # ✅ Secure Logout Route
+    # ✅ Auth Routes
+    path('accounts/login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
 ]
 

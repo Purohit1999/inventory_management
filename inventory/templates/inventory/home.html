@@ -10,7 +10,7 @@
         <div class="card-body">
           <h4 class="card-title">🔐 Login</h4>
           <p class="card-text">Access your inventory dashboard securely.</p>
-          <a href="{% url 'login' %}" class="btn btn-primary">Login Now</a>
+          <a href="{% url 'inventory:login' %}" class="btn btn-primary">Login Now</a>
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
           <p class="card-text">
             Inventory management involves tracking, storing, and managing products efficiently, ensuring businesses meet demand without overstocking or running out.
           </p>
-          <a href="{% url 'product_list' %}" class="btn btn-outline-success">Explore Products</a>
+          <a href="{% url 'inventory:product_list' %}" class="btn btn-outline-success">Explore Products</a>
         </div>
       </div>
     </div>
