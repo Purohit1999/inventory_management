@@ -2,8 +2,9 @@
 {% load static %}
 
 {% block content %}
-<div class="container flex-grow-1 d-flex align-items-center justify-content-center" style="min-height: 70vh;">
+<div class="container flex-grow-1 d-flex align-items-center justify-content-center" style="min-height: 100vh;">
   <div class="row w-100">
+
     <!-- Login Card -->
     <div class="col-md-6 mb-4">
       <div class="card shadow-sm h-100">
@@ -23,10 +24,13 @@
           <p class="card-text">
             Inventory management involves tracking, storing, and managing products efficiently, ensuring businesses meet demand without overstocking or running out.
           </p>
-          <a href="{% url 'inventory:product_list' %}" class="btn btn-outline-success">Explore Products</a>
+          <a href="{% url 'inventory:product_list' if user.is_authenticated else 'inventory:login' %}" class="btn btn-outline-success">
+            Explore Products
+          </a>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 {% endblock %}
