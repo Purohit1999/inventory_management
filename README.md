@@ -62,50 +62,58 @@ The application is built using **Django (Python), Bootstrap, JavaScript, and SQL
 ---
 ## 👤 User Stories
 
-User Stories for Inventory Management System
+---
+
+### ✅ User Stories for Inventory Management System
 
 This document outlines the user stories for an Inventory Management System, detailing the needs and requirements of both business owners and store employees. The goal is to create a user-friendly platform that streamlines inventory management, enhances productivity, and ensures security.
 
-### 🧑‍💻 As a Business Owner, I want to:
+---
 
-#### 1. Easily add and manage inventory to keep track of available products.
+### 🧑‍💻 As a **Business Owner**, I want to:
 
-This feature allows business owners to quickly input new products and update existing ones, ensuring that inventory levels are accurate and up-to-date.
+#### 1. 🟢 **Create** new products via a clean and simple form.
+Allows business owners to input product name, description, price, stock, and category with helpful placeholder hints and validations.
 
-#### 2. Bulk upload inventory from CSV/Excel to save time in data entry.
+#### 2. 📥 **Bulk Upload** inventory from CSV/Excel.
+Reduces manual work by allowing upload of multiple products at once using spreadsheet files.
 
-By enabling bulk uploads, business owners can efficiently manage large inventories without the need for repetitive manual entry, thus saving valuable time.
+#### 3. 📤 **Export** current inventory data to CSV.
+Enables download of product data for analysis, reporting, or sharing with teams and stakeholders.
 
-#### 3. Download inventory data as a CSV for reporting and analysis.
+#### 4. 🟡 **Update** product details easily from the product list.
+Edit buttons beside each product make it easy to modify information like price or stock without navigating away.
 
-This functionality provides business owners with the ability to export their inventory data for further analysis, reporting, or sharing with stakeholders.
+#### 5. 🔴 **Delete** products with a confirmation step.
+Remove outdated items while preventing accidental deletions through a safety prompt.
 
-#### 4. Quickly update product details without navigating complex menus.
+#### 6. 🔒 Ensure system security with login functionality.
+Only authenticated users can create, read, update, or delete inventory data.
 
-A streamlined interface for updating product information ensures that business owners can make changes swiftly, improving operational efficiency.
+---
 
-#### 5. Ensure security with user authentication, restricting access to authorized personnel only.
+### 👥 As a **Store Employee**, I want to:
 
-Implementing robust user authentication safeguards sensitive inventory data, ensuring that only authorized users can access or modify information.
+#### 1. 📃 **Read/View** all products in a categorized and organized list.
+See products grouped by category with stock levels and prices clearly displayed.
 
-### 👥 As a Store Employee, I want to:
+#### 2. 🔎 Use a **search or filter** to quickly find products.
+Speeds up customer service and internal inventory checks by locating items faster.
 
-#### 1. View all products in an organized manner with categories and pricing.
+#### 3. ✏️ **Edit** stock or pricing instantly.
+Allows employees to reflect changes in real-time as items are sold, restocked, or repriced.
 
-An organized display of products helps store employees quickly locate items, enhancing their ability to assist customers effectively.
+#### 4. ✅ Be prompted before deleting anything.
+Avoids accidental loss of important data by showing a confirmation dialog before deletion.
 
-#### 2. Search for products easily using a search or filter feature.
+---
 
-A search function allows employees to find specific products quickly, improving response times and customer service.
+This document serves as a foundational guide for developing an Inventory Management System that meets the needs of both business owners and store employees, with a strong focus on the **CRUD operations**:
 
-#### 3. Edit product details quickly when stock levels or prices change.
-
-Store employees should have the ability to make immediate updates to product information, ensuring that customers always receive accurate information.
-
-#### 4. Prevent accidental deletions by adding confirmation steps.
-
-Implementing confirmation steps before deletion actions helps protect against unintentional loss of inventory data, maintaining the integrity of the inventory system.
-This document serves as a foundational guide for developing an Inventory Management System that meets the needs of both business owners and store employees, ultimately leading to a more efficient and secure inventory management process.
+- **C**reate → Add product or upload CSV  
+- **R**ead → View product list  
+- **U**pdate → Edit product details  
+- **D**elete → Remove product securely
 
 ---
 ## 🎨 UX/UI Design
