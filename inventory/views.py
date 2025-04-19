@@ -51,14 +51,14 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"✅ Welcome {user.username}!")
-                return redirect("inventory:home")
+                return redirect("inventory:product_list")  # Redirect to product list after login
             else:
                 messages.error(request, "❌ Invalid credentials.")
         else:
             messages.error(request, "❌ Please correct the errors below.")
     else:
         form = AuthenticationForm()
-    return render(request, "inventory/login.html", {"form": form})
+    return render(request, "registration/login.html", {"form": form})  # Use correct template path
 
 @method_decorator(csrf_exempt, name="dispatch")
 class CustomLogoutView(LogoutView):

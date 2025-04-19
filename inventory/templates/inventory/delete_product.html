@@ -3,13 +3,16 @@
 {% block title %}Delete Product{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2 class="text-center text-danger">Delete Product</h2>
-    <p>Are you sure you want to delete "{{ product.name }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h2 class="text-center text-danger mb-4">⚠️ Confirm Delete</h2>
+        <p class="text-center">Are you sure you want to permanently delete <strong>"{{ product.name }}"</strong>?</p>
+        
+        <form method="post" class="text-center mt-4">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger me-2">Yes, Delete</button>
+            <a href="{% url 'inventory:product_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 </div>
 {% endblock %}
