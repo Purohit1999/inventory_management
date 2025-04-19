@@ -1,4 +1,5 @@
 {% extends 'inventory/base.html' %}
+{% load widget_tweaks %}  {# ✅ Load widget_tweaks for styling form fields #}
 
 {% block title %}Update Product{% endblock %}
 
@@ -17,34 +18,34 @@
                         <!-- Name -->
                         <div class="mb-3">
                             <label for="id_name" class="form-label fw-bold">Name</label>
-                            {{ form.name|as_widget(attrs={'class': 'form-control'}) }}
+                            {{ form.name|add_class:"form-control" }}
                         </div>
 
                         <!-- Description -->
                         <div class="mb-3">
                             <label for="id_description" class="form-label fw-bold">Description</label>
-                            {{ form.description|as_widget(attrs={'class': 'form-control', 'rows': 3}) }}
+                            {{ form.description|add_class:"form-control" }}
                         </div>
 
                         <!-- Price -->
                         <div class="mb-3">
                             <label for="id_price" class="form-label fw-bold">Price</label>
-                            {{ form.price|as_widget(attrs={'class': 'form-control'}) }}
+                            {{ form.price|add_class:"form-control" }}
                         </div>
 
                         <!-- Stock -->
                         <div class="mb-3">
                             <label for="id_stock" class="form-label fw-bold">Stock</label>
-                            {{ form.stock|as_widget(attrs={'class': 'form-control'}) }}
+                            {{ form.stock|add_class:"form-control" }}
                         </div>
 
                         <!-- Category -->
                         <div class="mb-3">
                             <label for="id_category" class="form-label fw-bold">Category</label>
-                            {{ form.category|as_widget(attrs={'class': 'form-select'}) }}
+                            {{ form.category|add_class:"form-select" }}
                         </div>
 
-                        <!-- Submit Button -->
+                        <!-- Submit -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg">💾 Save Changes</button>
                         </div>

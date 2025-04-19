@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "whitenoise.runserver_nostatic",
     "inventory",
+    "widget_tweaks",
 ]
 
 # ===========================
