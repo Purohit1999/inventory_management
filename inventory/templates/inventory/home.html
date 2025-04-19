@@ -24,9 +24,13 @@
           <p class="card-text">
             Inventory management involves tracking, storing, and managing products efficiently, ensuring businesses meet demand without overstocking or running out.
           </p>
-          <a href="{% url 'inventory:product_list' if user.is_authenticated else 'inventory:login' %}" class="btn btn-outline-success">
-            Explore Products
-          </a>
+
+          {% if user.is_authenticated %}
+            <a href="{% url 'inventory:product_list' %}" class="btn btn-outline-success">Explore Products</a>
+          {% else %}
+            <a href="{% url 'inventory:login' %}" class="btn btn-outline-warning">Login to Explore</a>
+          {% endif %}
+          
         </div>
       </div>
     </div>
