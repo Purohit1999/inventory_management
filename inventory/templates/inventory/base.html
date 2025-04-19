@@ -13,54 +13,59 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="{% url 'inventory:home' %}">📦 Inventory Management</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <!-- Wrapper for content and footer -->
+  <div class="wrapper flex-grow-1 d-flex flex-column">
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="{% url 'inventory:product_list' %}">Products</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'inventory:upload_file' %}">Upload</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'inventory:about_page' %}">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'inventory:contact' %}">Contact</a></li>
-          {% if user.is_authenticated %}
-            <li class="nav-item">
-              <form method="post" action="{% url 'logout' %}" class="d-inline">
-                {% csrf_token %}
-                <button class="btn btn-outline-light ms-2" type="submit">Logout</button>
-              </form>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link btn btn-outline-light ms-2" href="{% url 'inventory:login' %}">Login</a>
-            </li>
-          {% endif %}
-        </ul>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'inventory:home' %}">📦 Inventory Management</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'inventory:product_list' %}">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'inventory:upload_file' %}">Upload</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'inventory:about_page' %}">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'inventory:contact' %}">Contact</a></li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <form method="post" action="{% url 'logout' %}" class="d-inline">
+                  {% csrf_token %}
+                  <button class="btn btn-outline-light ms-2" type="submit">Logout</button>
+                </form>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link btn btn-outline-light ms-2" href="{% url 'inventory:login' %}">Login</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Page Content -->
-  <main class="flex-fill py-4">
-    <div class="container">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endfor %}
-      {% endif %}
-      {% block content %}{% endblock %}
-    </div>
-  </main>
+    <!-- Page Content -->
+    <main class="flex-fill py-4">
+      <div class="container">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+  </div> <!-- End of wrapper -->
 
   <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
     <div class="container">
       <small>© 2025 Inventory Management System. All rights reserved.</small>
     </div>
