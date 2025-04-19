@@ -370,7 +370,7 @@ Testing has ensured that the **Inventory Management System** is **fully function
   - Data is validated before insertion to prevent inconsistencies.
 
 ### **Entity Relationship Diagram (ERD)**:
-![ERD](images/ERD1.png)
+![ERD](images/erd1.png)
 This document provides a comprehensive overview of the Entity Relationship Diagram (ERD) for a relational database designed to manage products, users, and categories. The ERD illustrates the relationships between these entities and outlines their key attributes, ensuring a clear understanding of how data is structured and interconnected within the system.
 
 While the current focus is on inventory and product management, future enhancements may include additional entities such as orders and order items, allowing for full end-to-end tracking of customer transactions and purchase histories. This modular design ensures the database can be easily scaled as the system evolves.
