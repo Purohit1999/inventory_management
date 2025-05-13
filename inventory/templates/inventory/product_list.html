@@ -26,7 +26,7 @@
 
     <!-- ✅ Responsive Table -->
     <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle">
+        <table class="table table-striped table-hover align-middle products-table">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
@@ -40,12 +40,12 @@
             <tbody>
                 {% for product in products %}
                 <tr>
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>${{ product.price }}</td>
-                    <td>{{ product.stock }}</td>
-                    <td>{{ product.category }}</td>
-                    <td>
+                    <td data-label="ID">{{ product.id }}</td>
+                    <td data-label="Name">{{ product.name }}</td>
+                    <td data-label="Price">${{ product.price }}</td>
+                    <td data-label="Stock">{{ product.stock }}</td>
+                    <td data-label="Category">{{ product.category }}</td>
+                    <td data-label="Actions">
                         <a href="{% url 'inventory:update_product' product.id %}" class="btn btn-warning btn-sm mb-1">Edit</a>
                         <a href="{% url 'inventory:delete_product' product.id %}" class="btn btn-danger btn-sm mb-1">Delete</a>
                     </td>
