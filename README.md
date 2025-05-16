@@ -585,6 +585,22 @@ This acknowledgment is a testament to the collaborative efforts and resources th
 
 - UI/UX design prototypes were created using **Balsamiq Wireframes**, a low-fidelity wireframing tool that helped visualize the application's structure and user interactions during the planning phase.
 
+Here's a well-structured `README.md` format incorporating emojis, suitable for documenting your updates and justifications:
+
+---
+
+## ✨ JavaScript Folder Updates
+
+* 🔤 **File Naming Standardization**
+  All filenames in the `js` folder have been updated to **lowercase** for consistency and readability.
+
+* 🧩 **Exception: `SelectBox.js`**
+  I’ve intentionally retained the **PascalCase** for `SelectBox.js`, and here’s why:
+
+  > ✅ This file represents a **component-like or module-based structure**, and it follows the common JavaScript convention of using **PascalCase** for reusable logic, similar to a class or object.
+  > 🧠 It aligns with other files like `SelectFilter2.js`, ensuring **clarity, maintainability**, and adherence to established naming patterns.
+
+* 🔍 All imports and template references have been **verified** — no broken links or runtime issues have been introduced.
 
 ---
 ## 🎉 Conclusion
