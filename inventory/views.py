@@ -17,6 +17,15 @@ def home(request):
     return render(request, "inventory/home.html", {"products": products})
 
 def contact_page(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        # (Optional) You could log or store this information in a model or send an email
+
+        return render(request, "inventory/contact.html", {"success": True})
+    
     return render(request, "inventory/contact.html")
 
 def about_page(request):
@@ -51,14 +60,14 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"✅ Welcome {user.username}!")
-                return redirect("inventory:product_list")  # Redirect to product list after login
+                return redirect("inventory:product_list")
             else:
                 messages.error(request, "❌ Invalid credentials.")
         else:
             messages.error(request, "❌ Please correct the errors below.")
     else:
         form = AuthenticationForm()
-    return render(request, "registration/login.html", {"form": form})  # Use correct template path
+    return render(request, "registration/login.html", {"form": form})
 
 @method_decorator(csrf_exempt, name="dispatch")
 class CustomLogoutView(LogoutView):
